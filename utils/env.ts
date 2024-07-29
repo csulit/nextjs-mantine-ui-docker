@@ -2,6 +2,8 @@ import { z } from 'zod';
 import { createEnv } from '@t3-oss/env-nextjs';
 
 export const env = createEnv({
+  skipValidation: process.env.SKIP_ENV_VALIDATION === '1',
+  isServer: typeof window === 'undefined',
   server: {
     PUSHER_APP_SECRET: z.string().min(1),
   },
