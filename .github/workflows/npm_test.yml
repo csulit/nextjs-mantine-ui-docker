@@ -1,8 +1,8 @@
 name: npm test
 
 on:
-  pull_request:
-    branches: ["development"]
+  push:
+    branches: ['development']
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.event.number || github.sha }}
@@ -31,7 +31,6 @@ jobs:
           SKIP_ENV_VALIDATION: ${{ vars.SKIP_ENV_VALIDATION }}
           PUSHER_APP_ID: ${{ secrets.PUSHER_APP_ID }}
           PUSHER_APP_KEY: ${{ secrets.PUSHER_APP_KEY }}
-          PUSHER_APP_SECRET: ${{ secrets.PUSHER_APP_SECRET }}
           PUSHER_APP_CLUSTER: ${{ secrets.PUSHER_APP_CLUSTER }}
           PUSHER_APP_SECRET: ${{ secrets.PUSHER_APP_SECRET }}
           NEXT_PUBLIC_PUSHER_APP_KEY: ${{ vars.NEXT_PUBLIC_PUSHER_APP_KEY }}
@@ -43,7 +42,6 @@ jobs:
           SKIP_ENV_VALIDATION: ${{ vars.SKIP_ENV_VALIDATION }}
           PUSHER_APP_ID: ${{ secrets.PUSHER_APP_ID }}
           PUSHER_APP_KEY: ${{ secrets.PUSHER_APP_KEY }}
-          PUSHER_APP_SECRET: ${{ secrets.PUSHER_APP_SECRET }}
           PUSHER_APP_CLUSTER: ${{ secrets.PUSHER_APP_CLUSTER }}
           PUSHER_APP_SECRET: ${{ secrets.PUSHER_APP_SECRET }}
           NEXT_PUBLIC_PUSHER_APP_KEY: ${{ vars.NEXT_PUBLIC_PUSHER_APP_KEY }}
