@@ -1,7 +1,9 @@
 import '@mantine/core/styles.css';
 import React from 'react';
 import { MantineProvider, ColorSchemeScript } from '@mantine/core';
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { theme } from '../theme';
+import ReactQueryProvider from '@/components/ReactQueryProvider/ReactQueryProvider';
 
 export const metadata = {
   title: 'Mantine Next.js template',
@@ -20,7 +22,10 @@ export default function RootLayout({ children }: { children: any }) {
         />
       </head>
       <body>
-        <MantineProvider theme={theme}>{children}</MantineProvider>
+        <ReactQueryProvider>
+          <MantineProvider theme={theme}>{children}</MantineProvider>
+          <ReactQueryDevtools buttonPosition="bottom-left" initialIsOpen={false} />
+        </ReactQueryProvider>
       </body>
     </html>
   );

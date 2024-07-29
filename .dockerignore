@@ -1,0 +1,58 @@
+Dockerfile
+.dockerignore
+node_modules
+npm-debug.log
+README.md
+.next
+docker
+.git
+
+# Ignore environment variable files
+.env
+.env.local
+.env.*.local
+
+# Ignore log files
+logs
+*.log
+*.log.*
+
+# Ignore build directories
+dist
+build
+
+# Ignore test directories and files
+coverage
+*.spec.js
+*.test.js
+*.spec.ts
+*.test.ts
+
+# Ignore editor directories and files
+.vscode
+.idea
+*.swp
+
+# Ignore OS generated files
+.DS_Store
+Thumbs.db
+
+# Ignore temporary files
+tmp
+temp
+*.tmp
+*.temp
+
+# Ignore cache directories
+.cache
+.parcel-cache
+.nyc_output
+.pnp.*
+.yarn/cache
+.yarn/unplugged
+.yarn/build-state.yml
+.yarn/install-state.gz
+
+# Ignore other unnecessary files
+*.tgz
+*.tsbuildinfo
