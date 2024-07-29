@@ -9,6 +9,9 @@ WORKDIR /app
 # Copy package files first to leverage Docker caching
 COPY package.json yarn.lock ./
 RUN corepack enable && yarn install
+
+ARG DOCKER_BUILD
+ARG SKIP_ENV_VALIDATION
  
 # Copy the rest of the application code
 COPY . .
@@ -43,9 +46,6 @@ COPY --from=builder /app/.next/static ./.next/static
  
 # Adjust permissions; avoid errors if directory already exists
 RUN mkdir -p .next && chown nextjs:nodejs .next
- 
-# Ensure .env file is included in the final image if needed
-COPY --from=builder /app/.env .env
  
 USER nextjs
  
