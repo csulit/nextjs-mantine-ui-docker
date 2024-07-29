@@ -20,7 +20,7 @@ export default function HomePage() {
               scrolling="no"
               allowFullScreen
               id="kmc-live-chat-pop-up"
-              url="https://hub.kmc.solutions"
+              url="https://livechat.csulit.dev"
               width="400px"
               height="540px"
               styles={{ border: 'none', borderRadius: 16 }}
