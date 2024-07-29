@@ -20,10 +20,14 @@ export default function HomePage() {
               scrolling="no"
               allowFullScreen
               id="kmc-live-chat-pop-up"
-              url="https://livechat.csulit.dev"
+              url="http://localhost:3000"
               width="400px"
               height="540px"
-              styles={{ border: 'none', borderRadius: 16 }}
+              styles={{
+                border: 'none',
+                borderRadius: 16,
+                boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)',
+              }}
             />
           )}
           <ActionIcon
