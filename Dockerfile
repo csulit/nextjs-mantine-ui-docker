@@ -44,6 +44,7 @@ WORKDIR /app
 # Set environment variables to disable telemetry, set the environment to production, and define the port
 ENV NEXT_TELEMETRY_DISABLED=1
 ENV NODE_ENV=production
+ENV HOST=0.0.0.0
 ENV PORT=3000
 
 # Create user and group for running the application
