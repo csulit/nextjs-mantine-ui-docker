@@ -10,7 +10,7 @@ const withBundleAnalyzer = bundleAnalyzer({
 jiti('./utils/env');
 
 export default withBundleAnalyzer({
-  output: 'standalone',
+  output: process.env.DOCKER_BUILD === '1' ? 'standalone' : undefined,
   reactStrictMode: false,
   eslint: {
     ignoreDuringBuilds: true,
