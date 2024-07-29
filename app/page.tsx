@@ -1,7 +1,8 @@
 'use client';
 
 import { useState } from 'react';
-import { Affix, Button, Flex } from '@mantine/core';
+import { ActionIcon, Affix, Flex } from '@mantine/core';
+import { IconMessage } from '@tabler/icons-react';
 import Iframe from 'react-iframe';
 import { Welcome } from '../components/Welcome/Welcome';
 import { ColorSchemeToggle } from '../components/ColorSchemeToggle/ColorSchemeToggle';
@@ -17,18 +18,23 @@ export default function HomePage() {
           {open && (
             <Iframe
               scrolling="no"
-              loading="lazy"
               allowFullScreen
               id="kmc-live-chat-pop-up"
               url="https://hub.kmc.solutions"
               width="400px"
               height="540px"
               styles={{ border: 'none', borderRadius: 16 }}
-              display="block"
-              position="relative"
             />
           )}
-          <Button onClick={() => setOpen(!open)}>Button</Button>
+          <ActionIcon
+            size="xl"
+            radius={100}
+            loading={false}
+            loaderProps={{ type: 'dots' }}
+            onClick={() => setOpen(!open)}
+          >
+            <IconMessage />
+          </ActionIcon>
         </Flex>
       </Affix>
     </>
