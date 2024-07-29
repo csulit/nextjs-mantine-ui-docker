@@ -12,6 +12,10 @@ jiti('./utils/env');
 export default withBundleAnalyzer({
   output: process.env.DOCKER_BUILD === '1' ? 'standalone' : undefined,
   reactStrictMode: false,
+  serverRuntimeConfig: {
+    host: process.env.HOST || '0.0.0.0',
+    port: Number(process.env.PORT || '3000'),
+  },
   eslint: {
     ignoreDuringBuilds: true,
   },
