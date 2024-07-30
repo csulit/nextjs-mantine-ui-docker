@@ -19,10 +19,11 @@ export default function HomePage() {
           {open && (
             <Iframe
               scrolling="no"
+              loading="eager"
               id="kmc-live-chat-pop-up"
               url={`${env.NEXT_PUBLIC_APP_URL}/public/livechat`}
               width="400px"
-              height="540px"
+              height="560px"
               styles={{
                 border: 'none',
                 borderRadius: 16,

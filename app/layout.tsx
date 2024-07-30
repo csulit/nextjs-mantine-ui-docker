@@ -1,5 +1,6 @@
 import '@mantine/core/styles.css';
 import React from 'react';
+import { ClerkProvider } from '@clerk/nextjs';
 import { MantineProvider, ColorSchemeScript } from '@mantine/core';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { theme } from '../theme';
@@ -22,10 +23,12 @@ export default function RootLayout({ children }: { children: any }) {
         />
       </head>
       <body>
-        <ReactQueryProvider>
-          <MantineProvider theme={theme}>{children}</MantineProvider>
-          <ReactQueryDevtools buttonPosition="bottom-left" initialIsOpen={false} />
-        </ReactQueryProvider>
+        <ClerkProvider>
+          <ReactQueryProvider>
+            <MantineProvider theme={theme}>{children}</MantineProvider>
+            <ReactQueryDevtools buttonPosition="bottom-left" initialIsOpen={false} />
+          </ReactQueryProvider>
+        </ClerkProvider>
       </body>
     </html>
   );
