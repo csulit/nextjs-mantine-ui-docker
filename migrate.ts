@@ -6,11 +6,11 @@ import { drizzle } from 'drizzle-orm/postgres-js';
 
 dotenv.config();
 
-if (!process.env.DATABASE_URL) {
-  throw new Error('DATABASE_URL is not defined');
+if (!process.env.PG_USER_DATABASE_URL) {
+  throw new Error('PG_USER_DATABASE_URL is not defined');
 }
 
-const databaseUrl = drizzle(postgres(process.env.DATABASE_URL, { max: 1 }));
+const databaseUrl = drizzle(postgres(process.env.PG_USER_DATABASE_URL, { max: 1 }));
 
 // eslint-disable-next-line consistent-return
 const main = async () => {
