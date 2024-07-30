@@ -9,12 +9,11 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  test_pull_request:
+  npm_test_push:
     runs-on: ubuntu-latest
-    environment: ${{ (github.ref == 'refs/heads/main' && 'Production') || 'Development' }}
+    environment: NpmTest
     permissions:
       contents: read
-      packages: write
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
@@ -29,20 +28,8 @@ jobs:
         env:
           DOCKER_BUILD: ${{ vars.DOCKER_BUILD }}
           SKIP_ENV_VALIDATION: ${{ vars.SKIP_ENV_VALIDATION }}
-          PUSHER_APP_ID: ${{ secrets.PUSHER_APP_ID }}
-          PUSHER_APP_KEY: ${{ secrets.PUSHER_APP_KEY }}
-          PUSHER_APP_CLUSTER: ${{ secrets.PUSHER_APP_CLUSTER }}
-          PUSHER_APP_SECRET: ${{ secrets.PUSHER_APP_SECRET }}
-          NEXT_PUBLIC_PUSHER_APP_KEY: ${{ vars.NEXT_PUBLIC_PUSHER_APP_KEY }}
-          NEXT_PUBLIC_PUSHER_APP_CLUSTER: ${{ vars.NEXT_PUBLIC_PUSHER_APP_CLUSTER }}
       - name: Run tests
         run: npm test
         env:
           DOCKER_BUILD: ${{ vars.DOCKER_BUILD }}
           SKIP_ENV_VALIDATION: ${{ vars.SKIP_ENV_VALIDATION }}
-          PUSHER_APP_ID: ${{ secrets.PUSHER_APP_ID }}
-          PUSHER_APP_KEY: ${{ secrets.PUSHER_APP_KEY }}
-          PUSHER_APP_CLUSTER: ${{ secrets.PUSHER_APP_CLUSTER }}
-          PUSHER_APP_SECRET: ${{ secrets.PUSHER_APP_SECRET }}
-          NEXT_PUBLIC_PUSHER_APP_KEY: ${{ vars.NEXT_PUBLIC_PUSHER_APP_KEY }}
-          NEXT_PUBLIC_PUSHER_APP_CLUSTER: ${{ vars.NEXT_PUBLIC_PUSHER_APP_CLUSTER }}

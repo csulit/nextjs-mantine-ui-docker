@@ -19,7 +19,7 @@ export default function HomePage() {
             <Iframe
               scrolling="no"
               id="kmc-live-chat-pop-up"
-              url="http://localhost:3000"
+              url="https://livechat.csulit.dev"
               width="400px"
               height="540px"
               styles={{
