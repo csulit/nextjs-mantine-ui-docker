@@ -6,6 +6,7 @@ import { IconMessage } from '@tabler/icons-react';
 import Iframe from 'react-iframe';
 import { Welcome } from '../components/Welcome/Welcome';
 import { ColorSchemeToggle } from '../components/ColorSchemeToggle/ColorSchemeToggle';
+import { env } from '@/utils/env';
 
 export default function HomePage() {
   const [open, setOpen] = useState(false);
@@ -19,7 +20,7 @@ export default function HomePage() {
             <Iframe
               scrolling="no"
               id="kmc-live-chat-pop-up"
-              url="http://localhost:3000"
+              url={`${env.NEXT_PUBLIC_APP_URL}/public/livechat`}
               width="400px"
               height="540px"
               styles={{
