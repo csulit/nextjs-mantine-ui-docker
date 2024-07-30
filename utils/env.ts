@@ -5,6 +5,7 @@ export const env = createEnv({
   skipValidation: process.env.SKIP_ENV_VALIDATION === '1',
   isServer: typeof window === 'undefined',
   server: {
+    DATABASE_URL: z.string().min(1),
     PUSHER_APP_SECRET: z.string().min(1),
   },
   client: {
@@ -14,6 +15,7 @@ export const env = createEnv({
   },
   // If you're using Next.js < 13.4.4, you'll need to specify the runtimeEnv manually
   runtimeEnv: {
+    DATABASE_URL: process.env.DATABASE_URL,
     PUSHER_APP_SECRET: process.env.PUSHER_APP_SECRET,
     NEXT_PUBLIC_PUSHER_APP_KEY: process.env.NEXT_PUBLIC_PUSHER_APP_KEY,
     NEXT_PUBLIC_PUSHER_APP_CLUSTER: process.env.NEXT_PUBLIC_PUSHER_APP_CLUSTER,
