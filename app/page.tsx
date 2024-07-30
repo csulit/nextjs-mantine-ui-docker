@@ -18,7 +18,6 @@ export default function HomePage() {
           {open && (
             <Iframe
               scrolling="no"
-              allowFullScreen
               id="kmc-live-chat-pop-up"
               url="http://localhost:3000"
               width="400px"
