@@ -11,11 +11,29 @@ import {
   Text,
   Textarea,
 } from '@mantine/core';
+import { useViewportSize } from '@mantine/hooks';
 import { IconUpload, IconSend2 } from '@tabler/icons-react';
-import { ClipboardEvent, KeyboardEvent, useRef } from 'react';
+import { ClipboardEvent, KeyboardEvent, useEffect, useRef, useState } from 'react';
 
 export default function PublicLiveChat() {
   const scrollViewport = useRef<HTMLDivElement>(null);
+  const { width } = useViewportSize();
+  const [message, setMessage] = useState('');
+  const [messages, setMessages] = useState<string[]>([
+    'asdasdasdasd',
+    'asdasdasdasdasdasd',
+    'asdasd',
+  ]);
+
+  const scrollToBottom = () =>
+    scrollViewport.current!.scrollTo({
+      top: scrollViewport.current!.scrollHeight,
+      behavior: 'smooth',
+    });
+
+  const scrollToTop = () => scrollViewport.current!.scrollTo({ top: 0, behavior: 'smooth' });
+
+  const isOdd = (num: number): boolean => num % 2 !== 0;
 
   const handlePaste = (event: ClipboardEvent<HTMLTextAreaElement>) => {
     // Prevent the default paste behavior
@@ -45,18 +63,14 @@ export default function PublicLiveChat() {
   const handleKeyDown = (event: KeyboardEvent<HTMLTextAreaElement>) => {
     if (event.key === 'Enter' && !event.shiftKey) {
       event.preventDefault();
-      console.log('Enter key pressed without Shift');
-      // Add your custom logic here for handling Enter key
+      setMessages((oldData) => [...oldData, message]);
+      setMessage('');
     }
   };
 
-  const scrollToBottom = () =>
-    scrollViewport.current!.scrollTo({
-      top: scrollViewport.current!.scrollHeight,
-      behavior: 'smooth',
-    });
-
-  const scrollToTop = () => scrollViewport.current!.scrollTo({ top: 0, behavior: 'smooth' });
+  useEffect(() => {
+    scrollToBottom();
+  }, [messages.length]);
 
   return (
     <Flex justify="flex-start" align="flex-start" direction="column" h="100%">
@@ -73,61 +87,36 @@ export default function PublicLiveChat() {
         w="100%"
         viewportRef={scrollViewport}
       >
-        <Group wrap="nowrap" mb={10}>
-          <Avatar radius="xl" />
-          <Paper shadow="xs" p="sm" radius="md" maw="60%">
-            <Text size="xs">
-              Use it to create cards, dropdowns, modals and other components that require background
-              with shadow
-            </Text>
-          </Paper>
-        </Group>
-        <Group justify="flex-end" mr={5} wrap="nowrap" mb={10}>
-          <Paper shadow="xs" p="sm" radius="md" maw="60%">
-            <Text size="xs">
-              Use it to create cards, dropdowns, modals and other components that require background
-              with shadow
-            </Text>
-          </Paper>
-        </Group>
-        <Group wrap="nowrap" mb={10}>
-          <Avatar radius="xl" />
-          <Paper shadow="xs" p="sm" radius="md" maw="60%">
-            <Text size="xs">
-              Use it to create cards, dropdowns, modals and other components that require background
-              with shadow
-            </Text>
-          </Paper>
-        </Group>
-        <Group justify="flex-end" mr={5} wrap="nowrap" mb={10}>
-          <Paper shadow="xs" p="sm" radius="md" maw="60%">
-            <Text size="xs">
-              Use it to create cards, dropdowns, modals and other components that require background
-              with shadow
-            </Text>
-          </Paper>
-        </Group>
-        <Group wrap="nowrap" mb={10}>
-          <Avatar radius="xl" />
-          <Paper shadow="xs" p="sm" radius="md" maw="60%">
-            <Text size="xs">
-              Use it to create cards, dropdowns, modals and other components that require background
-              with shadow
-            </Text>
-          </Paper>
-        </Group>
-        <Group justify="flex-end" mr={5} wrap="nowrap" mb={10}>
-          <Paper shadow="xs" p="sm" radius="md" maw="60%">
-            <Text size="xs">
-              Use it to create cards, dropdowns, modals and other components that require background
-              with shadow
-            </Text>
-          </Paper>
-        </Group>
+        {messages.map((data, index) => (
+          <Group
+            mb={10}
+            wrap="wrap"
+            key={index}
+            mr={isOdd(index) ? 0 : 5}
+            align="center"
+            justify={isOdd(index) ? 'flex-start' : 'flex-end'}
+          >
+            {isOdd(index) && <Avatar radius="xl" />}
+            <Box component="div" maw={`${width / 2}px`} style={{ wordWrap: 'break-word' }}>
+              <Paper shadow="xs" p="sm" radius="md" w="auto">
+                <Text size="xs">{data}</Text>
+              </Paper>
+            </Box>
+          </Group>
+        ))}
       </ScrollArea>
       <Box component="div" p={10} w="100%">
         <Textarea
           radius={20}
+          value={message}
+          styles={{
+            input: {
+              overflow: 'hidden',
+              paddingTop: 5,
+              paddingBottom: 5,
+              paddingRight: 90,
+            },
+          }}
           rightSectionWidth="auto"
           rightSection={
             <Group gap="xs" mr={10}>
@@ -153,6 +142,7 @@ export default function PublicLiveChat() {
           }
           onPaste={handlePaste}
           onKeyDown={handleKeyDown}
+          onChange={(event) => setMessage(event.target.value)}
         />
       </Box>
     </Flex>
