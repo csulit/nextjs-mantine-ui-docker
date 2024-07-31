@@ -1,10 +1,22 @@
 'use client';
 
-import { ActionIcon, Box, Flex, Group, Textarea } from '@mantine/core';
+import {
+  ActionIcon,
+  Avatar,
+  Box,
+  Flex,
+  Group,
+  Paper,
+  ScrollArea,
+  Text,
+  Textarea,
+} from '@mantine/core';
 import { IconUpload, IconSend2 } from '@tabler/icons-react';
-import { ClipboardEvent, KeyboardEvent } from 'react';
+import { ClipboardEvent, KeyboardEvent, useRef } from 'react';
 
 export default function PublicLiveChat() {
+  const scrollViewport = useRef<HTMLDivElement>(null);
+
   const handlePaste = (event: ClipboardEvent<HTMLTextAreaElement>) => {
     // Prevent the default paste behavior
     event.preventDefault();
@@ -38,55 +50,103 @@ export default function PublicLiveChat() {
     }
   };
 
+  const scrollToBottom = () =>
+    scrollViewport.current!.scrollTo({
+      top: scrollViewport.current!.scrollHeight,
+      behavior: 'smooth',
+    });
+
+  const scrollToTop = () => scrollViewport.current!.scrollTo({ top: 0, behavior: 'smooth' });
+
   return (
     <Flex justify="flex-start" align="flex-start" direction="column" h="100%">
       <Box component="div" p={10} h="70" w="100%" bg="orange">
         a
       </Box>
-      <Box
-        component="div"
+      <ScrollArea
+        type="scroll"
+        scrollbarSize={6}
+        scrollbars="y"
         flex={1}
-        px={10}
+        p={10}
         h="100%"
         w="100%"
-        style={{
-          overflow: 'auto',
-          overflowX: 'hidden',
-        }}
+        viewportRef={scrollViewport}
       >
-        <p>a</p>
-        <p>a</p>
-        <p>a</p>
-        <p>a</p>
-        <p>a</p>
-        <p>a</p>
-        <p>a</p>
-        <p>a</p>
-        <p>a</p>
-        <p>a</p>
-        <p>a</p>
-        <p>a</p>
-        <p>a</p>
-        <p>a</p>
-        <p>a</p>
-        <p>a</p>
-        <p>a</p>
-        <p>a</p>
-        <p>a</p>
-        <p>a</p>
-        <p>a</p>
-        <p>a</p>
-      </Box>
+        <Group wrap="nowrap" mb={10}>
+          <Avatar radius="xl" />
+          <Paper shadow="xs" p="sm" radius="md" maw="60%">
+            <Text size="xs">
+              Use it to create cards, dropdowns, modals and other components that require background
+              with shadow
+            </Text>
+          </Paper>
+        </Group>
+        <Group justify="flex-end" mr={5} wrap="nowrap" mb={10}>
+          <Paper shadow="xs" p="sm" radius="md" maw="60%">
+            <Text size="xs">
+              Use it to create cards, dropdowns, modals and other components that require background
+              with shadow
+            </Text>
+          </Paper>
+        </Group>
+        <Group wrap="nowrap" mb={10}>
+          <Avatar radius="xl" />
+          <Paper shadow="xs" p="sm" radius="md" maw="60%">
+            <Text size="xs">
+              Use it to create cards, dropdowns, modals and other components that require background
+              with shadow
+            </Text>
+          </Paper>
+        </Group>
+        <Group justify="flex-end" mr={5} wrap="nowrap" mb={10}>
+          <Paper shadow="xs" p="sm" radius="md" maw="60%">
+            <Text size="xs">
+              Use it to create cards, dropdowns, modals and other components that require background
+              with shadow
+            </Text>
+          </Paper>
+        </Group>
+        <Group wrap="nowrap" mb={10}>
+          <Avatar radius="xl" />
+          <Paper shadow="xs" p="sm" radius="md" maw="60%">
+            <Text size="xs">
+              Use it to create cards, dropdowns, modals and other components that require background
+              with shadow
+            </Text>
+          </Paper>
+        </Group>
+        <Group justify="flex-end" mr={5} wrap="nowrap" mb={10}>
+          <Paper shadow="xs" p="sm" radius="md" maw="60%">
+            <Text size="xs">
+              Use it to create cards, dropdowns, modals and other components that require background
+              with shadow
+            </Text>
+          </Paper>
+        </Group>
+      </ScrollArea>
       <Box component="div" p={10} w="100%">
         <Textarea
           radius={20}
           rightSectionWidth="auto"
           rightSection={
             <Group gap="xs" mr={10}>
-              <ActionIcon size="lg" radius={100} loading={false} loaderProps={{ type: 'dots' }}>
+              <ActionIcon
+                size="lg"
+                radius={100}
+                loading={false}
+                loaderProps={{ type: 'dots' }}
+                onClick={scrollToTop}
+              >
                 <IconUpload />
               </ActionIcon>
-              <ActionIcon size="lg" radius={100} loading={false} loaderProps={{ type: 'dots' }}>
+              <ActionIcon
+                size="lg"
+                radius={100}
+                loading={false}
+                loaderProps={{ type: 'dots' }}
+                onClick={scrollToBottom}
+              >
                 <IconSend2 />
               </ActionIcon>
             </Group>
