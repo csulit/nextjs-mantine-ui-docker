@@ -15,8 +15,6 @@ export default function HomePage() {
   const isBigScreen = useMediaQuery('(min-width: 640px)');
   const affixSize = { bottom: !isBigScreen ? 5 : 20, right: !isBigScreen ? 5 : 20 };
 
-  console.log({ height, width });
-
   return (
     <>
       <Welcome />
