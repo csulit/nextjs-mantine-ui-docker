@@ -21,33 +21,30 @@ export default function HomePage() {
       <ColorSchemeToggle />
       <Affix position={affixSize}>
         <Flex direction="column" justify="flex-end" align="flex-end" gap={10}>
-          {open && (
-            <Iframe
-              scrolling="no"
-              loading="eager"
-              allowFullScreen
-              id="kmc-live-chat-pop-up"
-              url={`${env.NEXT_PUBLIC_APP_URL}/public/livechat`}
-              width={!isBigScreen ? `${width}px` : '400px'}
-              height={!isBigScreen ? `${height - 5}px` : '560px'}
-              styles={{
-                border: 'none',
-                borderRadius: 16,
-                boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)',
-              }}
-            />
-          )}
-          {!isBigScreen && open && (
-            <ActionIcon
-              size="xl"
-              radius={100}
-              loading={false}
-              loaderProps={{ type: 'dots' }}
-              onClick={() => setOpen(!open)}
-            >
-              <IconMessage />
-            </ActionIcon>
-          )}
+          <Iframe
+            scrolling="no"
+            loading="eager"
+            allowFullScreen
+            id="kmc-live-chat-pop-up"
+            url={`${env.NEXT_PUBLIC_APP_URL}/public/livechat`}
+            width={!isBigScreen ? `${width}px` : '400px'}
+            height={!isBigScreen ? `${height - 20}px` : '560px'}
+            styles={{
+              border: 'none',
+              borderRadius: 16,
+              boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)',
+              display: open ? 'block' : 'none',
+            }}
+          />
+          <ActionIcon
+            size="xl"
+            radius={100}
+            loading={false}
+            loaderProps={{ type: 'dots' }}
+            onClick={() => setOpen(!open)}
+          >
+            <IconMessage />
+          </ActionIcon>
         </Flex>
       </Affix>
     </>
