@@ -3,7 +3,9 @@ import { headers } from 'next/headers';
 export default async function PublicTest() {
   const header = headers();
 
-  console.log(header.get('x-forwarded-host'));
+  for (const [key, value] of header.entries()) {
+    console.log(`${key}: ${value}`);
+  }
 
-  return <div></div>;
+  return <div>asdasd</div>;
 }
