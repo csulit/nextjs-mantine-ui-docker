@@ -12,7 +12,7 @@ import { env } from '@/utils/env';
 export default function HomePage() {
   const [open, setOpen] = useState(false);
   const isBigScreen = useMediaQuery('(min-width: 640px)');
-  const affixSize = { bottom: !isBigScreen ? 10 : 20, right: !isBigScreen ? 0 : 20 };
+  const affixSize = { bottom: !isBigScreen ? 1 : 20, right: !isBigScreen ? 1 : 20 };
 
   return (
     <>
