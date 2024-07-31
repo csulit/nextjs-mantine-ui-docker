@@ -97,7 +97,7 @@ export default function PublicLiveChat() {
             justify={isOdd(index) ? 'flex-start' : 'flex-end'}
           >
             {isOdd(index) && <Avatar radius="xl" />}
-            <Box component="div" maw={`${width / 1.8}px`} style={{ wordWrap: 'break-word' }}>
+            <Box component="div" maw={`${width / 2}px`} style={{ wordWrap: 'break-word' }}>
               <Paper shadow="xs" p="sm" radius="md" w="auto">
                 <Text size="xs">{data}</Text>
               </Paper>
