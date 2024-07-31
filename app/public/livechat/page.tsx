@@ -1,7 +1,7 @@
 'use client';
 
-import { ActionIcon, Box, Flex, Textarea } from '@mantine/core';
-import { IconSend2 } from '@tabler/icons-react';
+import { ActionIcon, Box, Flex, Group, Textarea } from '@mantine/core';
+import { IconUpload, IconSend2 } from '@tabler/icons-react';
 import { ClipboardEvent, KeyboardEvent } from 'react';
 
 export default function PublicLiveChat() {
@@ -40,10 +40,20 @@ export default function PublicLiveChat() {
 
   return (
     <Flex justify="flex-start" align="flex-start" direction="column" h="100%">
-      <Box component="div" p={10} h="70" w="100%" bg="red">
+      <Box component="div" p={10} h="70" w="100%" bg="orange">
         a
       </Box>
-      <Box component="div" flex={1} px={10} h="100%" w="100%" style={{ overflow: 'scroll' }}>
+      <Box
+        component="div"
+        flex={1}
+        px={10}
+        h="100%"
+        w="100%"
+        style={{
+          overflow: 'auto',
+          overflowX: 'hidden',
+        }}
+      >
         <p>a</p>
         <p>a</p>
         <p>a</p>
@@ -69,16 +79,17 @@ export default function PublicLiveChat() {
       </Box>
       <Box component="div" p={10} w="100%">
         <Textarea
+          radius={20}
+          rightSectionWidth="auto"
           rightSection={
-            <ActionIcon
-              size="lg"
-              mr={20}
-              radius={100}
-              loading={false}
-              loaderProps={{ type: 'dots' }}
-            >
-              <IconSend2 />
-            </ActionIcon>
+            <Group gap="xs" mr={10}>
+              <ActionIcon size="lg" radius={100} loading={false} loaderProps={{ type: 'dots' }}>
+                <IconUpload />
+              </ActionIcon>
+              <ActionIcon size="lg" radius={100} loading={false} loaderProps={{ type: 'dots' }}>
+                <IconSend2 />
+              </ActionIcon>
+            </Group>
           }
           onPaste={handlePaste}
           onKeyDown={handleKeyDown}
