@@ -74,7 +74,7 @@ export default function PublicLiveChat() {
 
   return (
     <Flex justify="flex-start" align="flex-start" direction="column" h="100%">
-      <Box component="div" p={10} h="70" w="100%" bg="orange">
+      <Box component="div" p={10} h="70" w="100%" bg={{ base: 'orange', dark: 'rgb(255, 165, 0)' }}>
         a
       </Box>
       <ScrollArea
