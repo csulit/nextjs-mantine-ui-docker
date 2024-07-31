@@ -1,5 +1,11 @@
-import { Loader } from '@mantine/core';
+import { Center, Flex, Loader } from '@mantine/core';
 
 export default function PublicLivechatLoader() {
-  return <Loader size={30} />;
+  return (
+    <Center h="100vh">
+      <Flex justify="center" align="center">
+        <Loader size={30} />
+      </Flex>
+    </Center>
+  );
 }

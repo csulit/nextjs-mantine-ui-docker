@@ -21,7 +21,7 @@ export default function HomePage() {
               scrolling="no"
               loading="eager"
               id="kmc-live-chat-pop-up"
-              url={`${env.NEXT_PUBLIC_APP_URL}/public/livechat`}
+              url={`${env.NEXT_PUBLIC_APP_URL}/public/test`}
               width="400px"
               height="560px"
               styles={{
