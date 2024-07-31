@@ -11,13 +11,14 @@ import { env } from '@/utils/env';
 
 export default function HomePage() {
   const [open, setOpen] = useState(false);
-  const isMobile = useMediaQuery('(min-width: 640px)');
+  const isBigScreen = useMediaQuery('(min-width: 640px)');
+  const affixSize = { bottom: !isBigScreen ? 10 : 20, right: !isBigScreen ? 0 : 20 };
 
   return (
     <>
       <Welcome />
       <ColorSchemeToggle />
-      <Affix position={{ bottom: 15, right: isMobile ? 0 : 15 }}>
+      <Affix position={affixSize}>
         <Flex direction="column" justify="flex-end" align="flex-end" gap={10}>
           {open && (
             <Iframe
