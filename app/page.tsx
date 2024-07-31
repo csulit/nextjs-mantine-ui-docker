@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import { ActionIcon, Affix, Flex } from '@mantine/core';
+import { useMediaQuery } from '@mantine/hooks';
 import { IconMessage } from '@tabler/icons-react';
 import Iframe from 'react-iframe';
 import { Welcome } from '../components/Welcome/Welcome';
@@ -10,16 +11,19 @@ import { env } from '@/utils/env';
 
 export default function HomePage() {
   const [open, setOpen] = useState(false);
+  const isMobile = useMediaQuery('(min-width: 640px)');
+
   return (
     <>
       <Welcome />
       <ColorSchemeToggle />
-      <Affix position={{ bottom: 20, right: 20 }}>
+      <Affix position={{ bottom: 15, right: isMobile ? 0 : 15 }}>
         <Flex direction="column" justify="flex-end" align="flex-end" gap={10}>
           {open && (
             <Iframe
               scrolling="no"
               loading="eager"
+              allowFullScreen
               id="kmc-live-chat-pop-up"
               url={`${env.NEXT_PUBLIC_APP_URL}/public/livechat`}
               width="400px"
