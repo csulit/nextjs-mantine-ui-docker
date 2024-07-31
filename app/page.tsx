@@ -13,13 +13,12 @@ export default function HomePage() {
   const [open, setOpen] = useState(false);
   const { height, width } = useViewportSize();
   const isBigScreen = useMediaQuery('(min-width: 640px)');
-  const affixSize = { bottom: 10, right: 10 };
 
   return (
     <>
       <Welcome />
       <ColorSchemeToggle />
-      <Affix position={affixSize}>
+      <Affix position={{ bottom: 10, right: 10 }}>
         <Flex direction="column" justify="flex-end" align="flex-end" gap={10}>
           <Iframe
             scrolling="no"
