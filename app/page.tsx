@@ -13,7 +13,7 @@ export default function HomePage() {
   const [open, setOpen] = useState(false);
   const { height, width } = useViewportSize();
   const isBigScreen = useMediaQuery('(min-width: 640px)');
-  const affixSize = { bottom: !isBigScreen ? 5 : 20, right: !isBigScreen ? 5 : 20 };
+  const affixSize = { bottom: 10, right: 10 };
 
   return (
     <>
@@ -27,8 +27,8 @@ export default function HomePage() {
             allowFullScreen
             id="kmc-live-chat-pop-up"
             url={`${env.NEXT_PUBLIC_APP_URL}/public/livechat`}
-            width={!isBigScreen ? `${width}px` : '400px'}
-            height={!isBigScreen ? `${height - 20}px` : '560px'}
+            width={!isBigScreen ? `${width - 20}px` : '400px'}
+            height={!isBigScreen ? `${height - 100}px` : '560px'}
             styles={{
               border: 'none',
               borderRadius: 16,
