@@ -32,8 +32,8 @@ export default function HomePage() {
             styles={{
               border: 'none',
               borderRadius: 16,
-              boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)',
               display: open ? 'block' : 'none',
+              boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)',
             }}
           />
           <ActionIcon
