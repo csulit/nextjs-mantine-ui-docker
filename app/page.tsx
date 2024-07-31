@@ -31,7 +31,7 @@ export default function HomePage() {
               id="kmc-live-chat-pop-up"
               url={`${env.NEXT_PUBLIC_APP_URL}/public/livechat`}
               width={!isBigScreen ? `${width}px` : '400px'}
-              height={!isBigScreen ? `${height - 25}px` : '560'}
+              height={!isBigScreen ? `${height - 5}px` : '560'}
               styles={{
                 border: 'none',
                 borderRadius: 16,
