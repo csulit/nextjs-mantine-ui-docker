@@ -39,15 +39,17 @@ export default function HomePage() {
               }}
             />
           )}
-          <ActionIcon
-            size="xl"
-            radius={100}
-            loading={false}
-            loaderProps={{ type: 'dots' }}
-            onClick={() => setOpen(!open)}
-          >
-            <IconMessage />
-          </ActionIcon>
+          {!isBigScreen && open && (
+            <ActionIcon
+              size="xl"
+              radius={100}
+              loading={false}
+              loaderProps={{ type: 'dots' }}
+              onClick={() => setOpen(!open)}
+            >
+              <IconMessage />
+            </ActionIcon>
+          )}
         </Flex>
       </Affix>
     </>
