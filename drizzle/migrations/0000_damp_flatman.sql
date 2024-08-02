@@ -25,28 +25,40 @@ CREATE TABLE IF NOT EXISTS "hostnames" (
 	CONSTRAINT "hostnames_domain_unique" UNIQUE("domain")
 );
 --> statement-breakpoint
+CREATE TABLE IF NOT EXISTS "messages" (
+	"id" serial PRIMARY KEY NOT NULL,
+	"is_system_message" boolean DEFAULT false,
+	"conversation_id" integer NOT NULL,
+	"sender_id" integer NOT NULL,
+	"message_text" text NOT NULL,
+	"components" json,
+	"system_messages" json,
+	"read_status" boolean DEFAULT false NOT NULL,
+	"created_at" timestamp DEFAULT now() NOT NULL,
+	"updated_at" timestamp NOT NULL
+);
+--> statement-breakpoint
+CREATE TABLE IF NOT EXISTS "roles" (
+	"id" serial PRIMARY KEY NOT NULL,
+	"name" text
+);
+--> statement-breakpoint
 CREATE TABLE IF NOT EXISTS "users" (
 	"id" serial PRIMARY KEY NOT NULL,
 	"clerk_id" varchar(255) NOT NULL,
-	"full_name" text,
+	"name" text,
 	"email" text NOT NULL,
 	"created_at" timestamp DEFAULT now(),
 	CONSTRAINT "users_clerk_id_unique" UNIQUE("clerk_id"),
 	CONSTRAINT "users_email_unique" UNIQUE("email")
 );
 --> statement-breakpoint
-CREATE TABLE IF NOT EXISTS "messages" (
-	"id" serial PRIMARY KEY NOT NULL,
-	"conversation_id" integer NOT NULL,
-	"sender_id" integer NOT NULL,
-	"message_text" text NOT NULL,
-	"read_status" boolean DEFAULT false NOT NULL,
-	"created_at" timestamp DEFAULT now() NOT NULL,
-	"updated_at" timestamp NOT NULL
+CREATE TABLE IF NOT EXISTS "user_roles" (
+	"user_id" serial NOT NULL,
+	"role_id" serial NOT NULL,
+	CONSTRAINT "user_roles_user_id_role_id_pk" PRIMARY KEY("user_id","role_id")
 );
 --> statement-breakpoint
-DROP TABLE "hostname";--> statement-breakpoint
-DROP TABLE "user";--> statement-breakpoint
 DO $$ BEGIN
  ALTER TABLE "attachments" ADD CONSTRAINT "attachments_message_id_messages_id_fk" FOREIGN KEY ("message_id") REFERENCES "public"."messages"("id") ON DELETE no action ON UPDATE no action;
 EXCEPTION
