@@ -17,7 +17,7 @@ export const user = pgTable('users', {
   clerkId: varchar('clerk_id', { length: 255 }).notNull().unique(),
   name: text('name'),
   email: text('email').notNull().unique(),
-  createdAt: timestamp('created_at').defaultNow(),
+  createdAt: timestamp('created_at', { mode: 'string' }).defaultNow(),
 });
 
 export const userRelations = relations(user, ({ many }) => ({
@@ -88,8 +88,8 @@ export const message = pgTable('messages', {
   components: json('components').$type<{ name: string; value: string }[]>(),
   systemMessages: json('system_messages').$type<string[]>(),
   readStatus: boolean('read_status').notNull().default(false),
-  createdAt: timestamp('created_at').notNull().defaultNow(),
-  updatedAt: timestamp('updated_at').notNull(),
+  createdAt: timestamp('created_at', { mode: 'string' }).notNull().defaultNow(),
+  updatedAt: timestamp('updated_at', { mode: 'string' }).notNull(),
 });
 
 export const messageRelations = relations(message, ({ one, many }) => ({
@@ -114,8 +114,8 @@ export const attachment = pgTable('attachments', {
   filePath: text('file_path').notNull(),
   fileType: text('file_type').notNull(),
   fileSize: integer('file_size').notNull(),
-  createdAt: timestamp('created_at').notNull().defaultNow(),
-  updatedAt: timestamp('updated_at').notNull(),
+  createdAt: timestamp('created_at', { mode: 'string' }).notNull().defaultNow(),
+  updatedAt: timestamp('updated_at', { mode: 'string' }).notNull(),
 });
 
 export const attachmentRelations = relations(attachment, ({ one }) => ({
@@ -131,7 +131,7 @@ export const hostname = pgTable('hostnames', {
   domainId: uuid('domain_id').primaryKey().defaultRandom(),
   domain: varchar('domain', { length: 255 }).unique().notNull(),
   enabled: boolean('enabled').default(true),
-  createdAt: timestamp('created_at').defaultNow(),
+  createdAt: timestamp('created_at', { mode: 'string' }).defaultNow(),
 });
 
 export type Hostname = InferSelectModel<typeof hostname>;
