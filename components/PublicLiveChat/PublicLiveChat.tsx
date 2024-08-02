@@ -16,7 +16,7 @@ export default function PublicLiveChat() {
     <Affix position={{ bottom: 10, right: 10 }}>
       <Flex direction="column" justify="flex-end" align="flex-end" gap={10}>
         <LiveChatIframe open={open} />
-        <LiveChatToggle onToggle={onToggle} />
+        <LiveChatToggle iframeOpened={open} onToggle={onToggle} />
       </Flex>
     </Affix>
   );
