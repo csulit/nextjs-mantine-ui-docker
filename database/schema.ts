@@ -61,8 +61,16 @@ export const conversation = pgTable('conversations', {
   updatedAt: timestamp('updated_at', { mode: 'string' }).notNull(),
 });
 
-export const conversationRelations = relations(conversation, ({ many }) => ({
+export const conversationRelations = relations(conversation, ({ one, many }) => ({
   messages: many(message),
+  customer: one(user, {
+    fields: [conversation.customerId],
+    references: [user.id],
+  }),
+  supportAgent: one(user, {
+    fields: [conversation.supportAgentId],
+    references: [user.id],
+  }),
 }));
 
 export type Conversation = InferSelectModel<typeof conversation>;
@@ -84,7 +92,7 @@ export const message = pgTable('messages', {
   updatedAt: timestamp('updated_at').notNull(),
 });
 
-export const messageRelations = relations(message, ({ one }) => ({
+export const messageRelations = relations(message, ({ one, many }) => ({
   conversation: one(conversation, {
     fields: [message.conversationId],
     references: [conversation.id],
@@ -93,6 +101,7 @@ export const messageRelations = relations(message, ({ one }) => ({
     fields: [message.senderId],
     references: [user.id],
   }),
+  attachments: many(attachment),
 }));
 
 export type Message = InferSelectModel<typeof message>;
@@ -108,6 +117,13 @@ export const attachment = pgTable('attachments', {
   createdAt: timestamp('created_at').notNull().defaultNow(),
   updatedAt: timestamp('updated_at').notNull(),
 });
+
+export const attachmentRelations = relations(attachment, ({ one }) => ({
+  message: one(message, {
+    fields: [attachment.messageId],
+    references: [message.id],
+  }),
+}));
 
 export type Attachment = InferSelectModel<typeof attachment>;
 
