@@ -9,6 +9,7 @@ import {
   integer,
   boolean,
   uuid,
+  json,
 } from 'drizzle-orm/pg-core';
 
 export const user = pgTable('users', {
@@ -68,6 +69,7 @@ export type Conversation = InferSelectModel<typeof conversation>;
 
 export const message = pgTable('messages', {
   id: serial('id').primaryKey(),
+  isSystemMessage: boolean('is_system_message').default(false),
   conversationId: integer('conversation_id')
     .notNull()
     .references(() => conversation.id),
@@ -75,6 +77,8 @@ export const message = pgTable('messages', {
     .notNull()
     .references(() => user.id),
   messageText: text('message_text').notNull(),
+  components: json('components').$type<{ name: string; value: string }[]>(),
+  systemMessages: json('system_messages').$type<string[]>(),
   readStatus: boolean('read_status').notNull().default(false),
   createdAt: timestamp('created_at').notNull().defaultNow(),
   updatedAt: timestamp('updated_at').notNull(),

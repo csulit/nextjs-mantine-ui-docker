@@ -13,7 +13,7 @@ export function LiveChatToggle({ iframeOpened, onToggle }: LiveChatToggleProps) 
     <Popover
       offset={2.5}
       radius={20}
-      arrowSize={12}
+      arrowSize={16}
       arrowOffset={16}
       position="top-end"
       arrowPosition="side"
@@ -34,7 +34,7 @@ export function LiveChatToggle({ iframeOpened, onToggle }: LiveChatToggleProps) 
         </ActionIcon>
       </Popover.Target>
       <Popover.Dropdown>
-        <Title order={6}>Hey there!</Title>
+        <Title order={6}>Hey there 🤓!</Title>
         <Text size="xs">Need help? Contact Service Desk!</Text>
       </Popover.Dropdown>
     </Popover>
