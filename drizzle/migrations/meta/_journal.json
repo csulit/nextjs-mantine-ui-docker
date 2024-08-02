@@ -15,6 +15,27 @@
       "when": 1722402724344,
       "tag": "0001_confused_exiles",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1722561498205,
+      "tag": "0002_overconfident_lord_hawal",
+      "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "7",
+      "when": 1722564688573,
+      "tag": "0003_quick_shatterstar",
+      "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "7",
+      "when": 1722567335617,
+      "tag": "0004_nappy_sandman",
+      "breakpoints": true
     }
   ]
 }
