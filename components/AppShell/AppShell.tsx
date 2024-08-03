@@ -3,6 +3,7 @@
 import { ReactNode, useEffect, useReducer } from 'react';
 import {
   ActionIcon,
+  Affix,
   AppShell,
   Burger,
   Flex,
@@ -171,10 +172,10 @@ export function BasicAppShell({ children }: { children: ReactNode }) {
       padding="md"
     >
       <AppShell.Header>
-        <Group h="100%" px="md">
+        <Group h="100%" px="md" align="center">
           <Burger opened={opened} onClick={toggle} hiddenFrom="sm" size="sm" />
-          <Flex align="center" justify="space-between" w="100%">
-            <MantineLogo size={30} />
+          <MantineLogo size={30} />
+          <Affix py="md" pr="md" position={{ top: 0, right: 0 }}>
             <ActionIcon variant="filled" aria-label="Settings" onClick={toggleColorScheme}>
               {colorScheme === 'light' ? (
                 <IconMoon size="1.3rem" stroke={1.3} />
@@ -182,7 +183,7 @@ export function BasicAppShell({ children }: { children: ReactNode }) {
                 <IconSun size="1.3rem" stroke={1.3} />
               )}
             </ActionIcon>
-          </Flex>
+          </Affix>
         </Group>
       </AppShell.Header>
       <AppShell.Navbar p="md">
