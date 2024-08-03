@@ -4,9 +4,10 @@ import { env } from '@/utils/env';
 
 interface LiveChatIframeProps {
   open: boolean;
+  allowFullScreen?: boolean;
 }
 
-export function LiveChatIframe({ open }: LiveChatIframeProps) {
+export function LiveChatIframe({ open, allowFullScreen }: LiveChatIframeProps) {
   const colorScheme = useColorScheme();
   const isBigScreen = useMediaQuery('(min-width: 640px)');
   const { height: viewportHeight, width: viewportWidth } = useViewportSize();
@@ -21,8 +22,8 @@ export function LiveChatIframe({ open }: LiveChatIframeProps) {
     <Iframe
       scrolling="no"
       loading="eager"
-      allowFullScreen
       id="kmc-live-chat-pop-up"
+      allowFullScreen={allowFullScreen}
       url={`${env.NEXT_PUBLIC_APP_URL}/public/livechat`}
       width={getIframeWidth()}
       height={getIframeHeight()}
