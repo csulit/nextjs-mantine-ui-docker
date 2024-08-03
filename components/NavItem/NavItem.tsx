@@ -31,13 +31,13 @@ export function NavItem({ item }: NavItemProps) {
         href={item.href}
         label={item.label}
         childrenOffset={28}
+        leftSection={item.leftSection}
         styles={{
           label: {
             fontSize: NAVBAR_PARENT_LABEL_FONT_SIZE,
             fontWeight: NAVBAR_PARENT_LABEL_FONT_WEIGHT,
           },
         }}
-        leftSection={item.leftSection}
       >
         {item.child.map((childItem) => (
           <NavItem key={childItem.id} item={childItem} />
@@ -53,14 +53,14 @@ export function NavItem({ item }: NavItemProps) {
       active={item.active}
       href={item.href}
       label={item.label}
+      component={Link}
+      leftSection={item.leftSection}
       styles={{
         label: {
           fontSize: item.child ? NAVBAR_CHILD_LABEL_FONT_SIZE : NAVBAR_PARENT_LABEL_FONT_SIZE,
           fontWeight: item.child ? undefined : NAVBAR_PARENT_LABEL_FONT_WEIGHT,
         },
       }}
-      component={Link}
-      leftSection={item.leftSection}
     />
   );
 }

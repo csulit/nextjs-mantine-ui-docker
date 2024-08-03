@@ -1,11 +1,26 @@
 'use client';
 
 import { ReactNode, useEffect, useReducer } from 'react';
-import { AppShell, Burger, Group } from '@mantine/core';
+import {
+  ActionIcon,
+  AppShell,
+  Burger,
+  Flex,
+  Group,
+  useComputedColorScheme,
+  useMantineColorScheme,
+} from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
 import { MantineLogo } from '@mantinex/mantine-logo';
 import { usePathname } from 'next/navigation';
-import { IconChartArea, IconDashboard, IconMessage, IconRobotFace } from '@tabler/icons-react';
+import {
+  IconChartArea,
+  IconDashboard,
+  IconMessage,
+  IconRobotFace,
+  IconSun,
+  IconMoon,
+} from '@tabler/icons-react';
 import { defaultValues } from '@/configs/default-values';
 import { NavItem } from '../NavItem/NavItem';
 
@@ -53,7 +68,7 @@ const NAV_ITEMS = [
             active: false,
             label: 'Ai',
             href: '#livechat-settings-ai',
-            leftSection: <IconRobotFace size="1rem" stroke={1.5} />,
+            leftSection: <IconRobotFace size="1.5rem" stroke={1.6} />,
             child: null,
           },
         ],
@@ -134,12 +149,20 @@ const navReducer = (state: NavState, action: NavAction): NavState => {
 export function BasicAppShell({ children }: { children: ReactNode }) {
   const pathname = usePathname();
   const [opened, { toggle }] = useDisclosure();
+  const computedColorScheme = useComputedColorScheme('light');
+  const { colorScheme, setColorScheme } = useMantineColorScheme({
+    keepTransitions: true,
+  });
   const [navState, dispatch] = useReducer(navReducer, initialNavState);
   const { APPSHELL_HEADER_HEIGTH, APPSHELL_NAVBAR_WIDTH } = defaultValues;
 
   useEffect(() => {
     dispatch({ type: 'SET_ACTIVE', payload: pathname });
   }, [pathname]);
+
+  const toggleColorScheme = () => {
+    setColorScheme(computedColorScheme === 'dark' ? 'light' : 'dark');
+  };
 
   return (
     <AppShell
@@ -150,7 +173,16 @@ export function BasicAppShell({ children }: { children: ReactNode }) {
       <AppShell.Header>
         <Group h="100%" px="md">
           <Burger opened={opened} onClick={toggle} hiddenFrom="sm" size="sm" />
-          <MantineLogo size={30} />
+          <Flex align="center" justify="space-between" w="100%">
+            <MantineLogo size={30} />
+            <ActionIcon variant="filled" aria-label="Settings" onClick={toggleColorScheme}>
+              {colorScheme === 'light' ? (
+                <IconMoon size="1.3rem" stroke={1.3} />
+              ) : (
+                <IconSun size="1.3rem" stroke={1.3} />
+              )}
+            </ActionIcon>
+          </Flex>
         </Group>
       </AppShell.Header>
       <AppShell.Navbar p="md">
