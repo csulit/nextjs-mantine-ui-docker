@@ -17,13 +17,17 @@ const extractUser = (user: User): User => ({
 const PusherContext = createContext<PusherContextProps>({} as PusherContextProps);
 
 const PusherContextProvider: React.FC<PropsWithChildren> = ({ children }) => {
-  const testUser = { fullName: 'Christian angelo m sulit', email: 'christian.sulit@kmc.solutions' };
+  const testUser = {
+    userId: '12345',
+    fullName: 'Christian angelo m sulit',
+    email: 'christian.sulit@kmc.solutions',
+  };
   const [pusher, setPusher] = useState<Pusher | null>(null);
 
   useEffect(() => {
     if (!pusher) {
       Pusher.logToConsole = true;
-
+      console.log('Triggered pusher connection');
       const newPusher = new Pusher(env.NEXT_PUBLIC_PUSHER_APP_KEY, {
         cluster: env.NEXT_PUBLIC_PUSHER_APP_CLUSTER,
         userAuthentication: {

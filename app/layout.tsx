@@ -7,7 +7,8 @@ import { MantineProvider, ColorSchemeScript } from '@mantine/core';
 import { Notifications } from '@mantine/notifications';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { theme } from '../theme';
-import ReactQueryProvider from '@/components/ReactQueryProvider/ReactQueryProvider';
+import { ReactQueryProvider } from '@/context/ReactQueryProvider/ReactQueryProvider';
+import { PusherContextProvider } from '@/context/Pusher/PusherContext';
 
 export const metadata = {
   title: 'Mantine Next.js template',
@@ -28,10 +29,12 @@ export default function RootLayout({ children }: { children: any }) {
       <body>
         <ClerkProvider>
           <ReactQueryProvider>
-            <MantineProvider theme={theme}>
-              <Notifications />
-              {children}
-            </MantineProvider>
+            <PusherContextProvider>
+              <MantineProvider theme={theme}>
+                <Notifications />
+                {children}
+              </MantineProvider>
+            </PusherContextProvider>
             <ReactQueryDevtools buttonPosition="top-right" initialIsOpen={false} />
           </ReactQueryProvider>
         </ClerkProvider>
