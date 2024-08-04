@@ -1,5 +1,5 @@
-import { Welcome } from '../components/Welcome/Welcome';
-import { ColorSchemeToggle } from '../components/ColorSchemeToggle/ColorSchemeToggle';
+import { Welcome } from '@/components/Welcome/Welcome';
+import { ColorSchemeToggle } from '@/components/ColorSchemeToggle/ColorSchemeToggle';
 import PublicLiveChat from '@/components/PublicLiveChat/PublicLiveChat';
 import { BasicAppShell } from '@/components/AppShell/AppShell';
 
