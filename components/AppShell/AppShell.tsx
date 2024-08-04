@@ -6,7 +6,6 @@ import {
   Affix,
   AppShell,
   Burger,
-  Flex,
   Group,
   useComputedColorScheme,
   useMantineColorScheme,
@@ -14,6 +13,7 @@ import {
 import { useDisclosure } from '@mantine/hooks';
 import { MantineLogo } from '@mantinex/mantine-logo';
 import { usePathname } from 'next/navigation';
+import { UserButton } from '@clerk/nextjs';
 import {
   IconChartArea,
   IconDashboard,
@@ -190,6 +190,9 @@ export function BasicAppShell({ children }: { children: ReactNode }) {
         {navState.map((navItem) => (
           <NavItem key={navItem.id} item={navItem} />
         ))}
+        <Affix pb="md" pl="md" position={{ bottom: 0, left: 0 }}>
+          <UserButton />
+        </Affix>
       </AppShell.Navbar>
       <AppShell.Main>{children}</AppShell.Main>
     </AppShell>
