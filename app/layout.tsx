@@ -32,7 +32,7 @@ export default function RootLayout({ children }: { children: any }) {
               <Notifications />
               {children}
             </MantineProvider>
-            <ReactQueryDevtools buttonPosition="bottom-left" initialIsOpen={false} />
+            <ReactQueryDevtools buttonPosition="top-right" initialIsOpen={false} />
           </ReactQueryProvider>
         </ClerkProvider>
       </body>
