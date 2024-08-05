@@ -10,6 +10,7 @@ interface PusherContextProps {
 }
 
 const extractUser = (user: User): User => ({
+  userId: user.userId,
   fullName: user.fullName,
   email: user.email,
 });
@@ -18,7 +19,7 @@ const PusherContext = createContext<PusherContextProps>({} as PusherContextProps
 
 const PusherContextProvider: React.FC<PropsWithChildren> = ({ children }) => {
   const testUser = {
-    userId: '12345',
+    userId: 111,
     fullName: 'Christian angelo m sulit',
     email: 'christian.sulit@kmc.solutions',
   };
