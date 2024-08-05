@@ -1,5 +1,5 @@
 import type Pusher from 'pusher';
-import pusher from '@/lib/pusher';
+import pusher from '@/libs/pusher';
 
 export async function POST(request: Request) {
   const data = await request.json();
