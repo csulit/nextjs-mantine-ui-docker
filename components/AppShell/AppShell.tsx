@@ -6,24 +6,26 @@ import {
   Affix,
   AppShell,
   Burger,
+  Flex,
   Group,
+  Paper,
+  Title,
   useComputedColorScheme,
   useMantineColorScheme,
 } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
-import { MantineLogo } from '@mantinex/mantine-logo';
 import { usePathname } from 'next/navigation';
 import { UserButton } from '@clerk/nextjs';
 import {
   IconChartArea,
   IconDashboard,
   IconMessage,
-  IconRobotFace,
   IconSun,
   IconMoon,
 } from '@tabler/icons-react';
 import { defaultValues } from '@/configs/default-values';
-import { NavItem } from '../NavItem/NavItem';
+import { theme } from '@/theme';
+import { NavLinks } from '../NavLinks/NavLinks';
 
 const NAV_ITEMS = [
   {
@@ -31,7 +33,7 @@ const NAV_ITEMS = [
     active: true,
     label: 'Dashboard',
     href: '/',
-    leftSection: <IconDashboard size="1.5rem" stroke={1.6} />,
+    icon: IconDashboard,
     child: null,
   },
   {
@@ -39,14 +41,14 @@ const NAV_ITEMS = [
     active: false,
     label: 'Live Chat',
     href: '#livechat',
-    leftSection: <IconMessage size="1.5rem" stroke={1.6} />,
+    icon: IconMessage,
     child: [
       {
         id: 'livechat-chats',
         active: false,
         label: 'Chats',
         href: '/livechat/chats',
-        leftSection: null,
+        icon: null,
         child: null,
       },
       {
@@ -54,25 +56,8 @@ const NAV_ITEMS = [
         active: false,
         label: 'Agents',
         href: '/livechat/agents',
-        leftSection: null,
+        icon: null,
         child: null,
-      },
-      {
-        id: 'livechat-settings',
-        active: false,
-        label: 'Settings',
-        href: '#livechat-settings',
-        leftSection: null,
-        child: [
-          {
-            id: 'livechat-settings-ai',
-            active: false,
-            label: 'Ai',
-            href: '/livechat/settings/ai',
-            leftSection: <IconRobotFace size="1.5rem" stroke={1.6} />,
-            child: null,
-          },
-        ],
       },
     ],
   },
@@ -81,30 +66,38 @@ const NAV_ITEMS = [
     active: false,
     label: 'Analytics',
     href: '#analytics',
-    leftSection: <IconChartArea size="1.5rem" stroke={1.6} />,
+    icon: IconChartArea,
     child: [
+     {
+        id: 'analytics-summary',
+        active: false,
+        label: 'Summary',
+        href: '/analytics/summary',
+        icon: null,
+        child: null,
+      },
       {
         id: 'analytics-chats',
         active: false,
         label: 'Chats',
-        href: '#analytics-chats',
-        leftSection: null,
+        href: '/analytics/chats',
+        icon: null,
         child: null,
       },
       {
         id: 'analytics-tickets',
         active: false,
         label: 'Tickets',
-        href: '#analytics-tickets',
-        leftSection: null,
+        href: '/analytics/tickets',
+        icon: null,
         child: null,
       },
       {
         id: 'analytics-export-reports',
         active: false,
         label: 'Export reports',
-        href: '#analytics-export-reports',
-        leftSection: null,
+        href: '/analytics/reports',
+        icon: null,
         child: null,
       },
     ],
@@ -116,7 +109,7 @@ interface NavItem {
   active: boolean;
   label: string;
   href: string;
-  leftSection: React.ReactNode;
+  icon: React.FC<any> | null;
   child: NavItem[] | null;
 }
 
@@ -155,7 +148,7 @@ export function BasicAppShell({ children }: { children: ReactNode }) {
     keepTransitions: true,
   });
   const [navState, dispatch] = useReducer(navReducer, initialNavState);
-  const { APPSHELL_HEADER_HEIGTH, APPSHELL_NAVBAR_WIDTH } = defaultValues;
+  const { APPSHELL_HEADER_HEIGHT, APPSHELL_NAVBAR_WIDTH } = defaultValues;
 
   useEffect(() => {
     dispatch({ type: 'SET_ACTIVE', payload: pathname });
@@ -167,14 +160,20 @@ export function BasicAppShell({ children }: { children: ReactNode }) {
 
   return (
     <AppShell
-      header={{ height: APPSHELL_HEADER_HEIGTH }}
+      header={{ height: APPSHELL_HEADER_HEIGHT }}
       navbar={{ width: APPSHELL_NAVBAR_WIDTH, breakpoint: 'sm', collapsed: { mobile: !opened } }}
       padding="md"
     >
       <AppShell.Header>
         <Group h="100%" px="md" align="center">
           <Burger opened={opened} onClick={toggle} hiddenFrom="sm" size="sm" />
-          <MantineLogo size={30} />
+          <Flex gap="xs" align="center">
+            <Paper bg={theme.other?.pumpkin}>
+              <Title order={3} c="white" px="xs">KMC</Title>
+            </Paper>
+            <Title order={3} c={theme.other?.richBlack} fw={800}>LIVE CHAT CMS</Title>
+
+          </Flex>
           <Affix py="md" pr="md" position={{ top: 0, right: 0 }}>
             <ActionIcon variant="filled" aria-label="Settings" onClick={toggleColorScheme}>
               {colorScheme === 'light' ? (
@@ -186,9 +185,9 @@ export function BasicAppShell({ children }: { children: ReactNode }) {
           </Affix>
         </Group>
       </AppShell.Header>
-      <AppShell.Navbar p="md">
+      <AppShell.Navbar bg={theme.other?.richBlack} px="xs" py="md">
         {navState.map((navItem) => (
-          <NavItem key={navItem.id} item={navItem} />
+          <NavLinks key={navItem.id} {...navItem} />
         ))}
         <Affix pb="md" pl="md" position={{ bottom: 0, left: 0 }}>
           <UserButton />

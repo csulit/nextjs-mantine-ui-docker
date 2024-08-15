@@ -1,22 +1,21 @@
-import '@mantine/core/styles.css';
-import '@mantine/charts/styles.css';
-import '@mantine/notifications/styles.css';
 import React from 'react';
+import { headers } from 'next/headers';
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { ClerkProvider } from '@clerk/nextjs';
 import { auth } from '@clerk/nextjs/server';
-import { headers } from 'next/headers';
-import { MantineProvider, ColorSchemeScript } from '@mantine/core';
+import { ColorSchemeScript, MantineProvider } from '@mantine/core';
 import { Notifications } from '@mantine/notifications';
-import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
-import { theme } from '../theme';
-import { ReactQueryProvider } from '@/context/ReactQueryProvider/ReactQueryProvider';
-import { PusherContextProvider } from '@/context/Pusher/PusherContext';
 import { BasicAppShell } from '@/components/AppShell/AppShell';
 import { defaultValues } from '@/configs/default-values';
+import { PusherContextProvider } from '@/context/Pusher/PusherContext';
+import { ReactQueryProvider } from '@/context/ReactQueryProvider/ReactQueryProvider';
+import '@mantine/charts/styles.css';
+import '@mantine/core/styles.css';
+import '@mantine/notifications/styles.css';
+import { cssResolver, theme } from '../theme';
 
 export const metadata = {
-  title: 'Mantine Next.js template',
-  description: 'I am using Mantine with Next.js!',
+  title: 'Live Chat CMS',
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
@@ -38,7 +37,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <ClerkProvider>
           <ReactQueryProvider>
             <PusherContextProvider>
-              <MantineProvider theme={theme}>
+              <MantineProvider theme={theme} cssVariablesResolver={cssResolver}>
                 <Notifications />
                 {userId && currentPathname !== defaultValues.PUBLIC_LIVECHAT_PATHNAME ? (
                   <BasicAppShell>{children}</BasicAppShell>
@@ -47,7 +46,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                 )}
               </MantineProvider>
             </PusherContextProvider>
-            <ReactQueryDevtools buttonPosition="top-right" initialIsOpen={false} />
+            <ReactQueryDevtools buttonPosition="bottom-right" initialIsOpen={false} />
           </ReactQueryProvider>
         </ClerkProvider>
       </body>

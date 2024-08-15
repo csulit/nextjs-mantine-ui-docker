@@ -1,3 +1,14 @@
+'use client';
+
+import { SortableTable } from '@/components/SortableTable/SortableTable';
+
 export default function ChatPage() {
-  return <div>a</div>;
+  return (
+    <div>
+      <SortableTable />
+      <SortableTable />
+      <SortableTable />
+      <SortableTable />
+    </div>
+  );
 }
