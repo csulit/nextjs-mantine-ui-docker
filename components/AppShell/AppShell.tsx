@@ -168,7 +168,7 @@ export function BasicAppShell({ children }: { children: ReactNode }) {
         <Group h="100%" px="md" align="center">
           <Burger opened={opened} onClick={toggle} hiddenFrom="sm" size="sm" />
           <Flex gap="xs" align="center">
-            <Paper bg={theme.other?.pumpkin}>
+            <Paper bg={theme.other?.orange600}>
               <Title order={3} c="white" px="xs">KMC</Title>
             </Paper>
             <Title order={3} c={theme.other?.richBlack} fw={800}>LIVE CHAT CMS</Title>
@@ -186,14 +186,17 @@ export function BasicAppShell({ children }: { children: ReactNode }) {
         </Group>
       </AppShell.Header>
       <AppShell.Navbar bg={theme.other?.richBlack} px="xs" py="md">
-        {navState.map((navItem) => (
-          <NavLinks key={navItem.id} {...navItem} />
-        ))}
+        <Flex direction="column" gap="xs">
+          {navState.map((navItem) => (
+            <NavLinks key={navItem.id} {...navItem} />
+          ))}
+        </Flex>
+
         <Affix pb="md" pl="md" position={{ bottom: 0, left: 0 }}>
           <UserButton />
         </Affix>
       </AppShell.Navbar>
-      <AppShell.Main>{children}</AppShell.Main>
+      <AppShell.Main bg={theme.other?.neutral300}>{children}</AppShell.Main>
     </AppShell>
   );
 }

@@ -12,6 +12,7 @@ import {
 import { IconChevronDown, IconChevronUp, IconSearch, IconSelector } from '@tabler/icons-react';
 import { useState } from 'react';
 import classes from './SortableTable.module.css';
+import Status from '../Status/Status';
 
 interface RowData {
   id: string;
@@ -24,9 +25,9 @@ interface RowData {
 
 interface ThProps {
   children: React.ReactNode;
-  reversed: boolean;
-  sorted: boolean;
-  onSort:()=> void;
+  reversed?: boolean;
+  sorted?: boolean;
+  onSort?:()=> void;
 }
 
 function Th({ children, reversed, sorted, onSort }: ThProps) {
@@ -38,9 +39,11 @@ function Th({ children, reversed, sorted, onSort }: ThProps) {
           <Text fw={500} fz="sm">
             {children}
           </Text>
-          <Center className={classes.icon}>
-            <Icon style={{ width: rem(16), height: rem(16) }} stroke={1.5} />
-          </Center>
+          {onSort &&
+            <Center className={classes.icon}>
+              <Icon style={{ width: rem(16), height: rem(16) }} stroke={1.5} />
+            </Center>
+          }
         </Group>
       </UnstyledButton>
     </Table.Th>
@@ -76,10 +79,19 @@ function sortData(
   );
 }
 
-const data = [
+interface Data {
+    id: string,
+    status: string,
+    visitor: string,
+    agent: string,
+    browser: string,
+    time: string,
+}
+
+const data :Data[] = [
   {
     id: '1',
-    status: 'Unclaimed',
+    status: 'Pending',
     visitor: 'Athena Weissnat',
     agent: 'Krish Ramos',
     browser: 'Chrome',
@@ -87,7 +99,7 @@ const data = [
   },
   {
     id: '2',
-    status: 'In-Progress',
+    status: 'Active',
     visitor: 'John Doe',
     agent: 'Krish Ramos',
     browser: 'Chrome',
@@ -103,7 +115,7 @@ const data = [
   },
   {
     id: '4',
-    status: 'Unclaimed',
+    status: 'Missed',
     visitor: 'Athena Weissnat',
     agent: 'Krish Ramos',
     browser: 'Chrome',
@@ -111,7 +123,7 @@ const data = [
   },
   {
     id: '5',
-    status: 'Unclaimed',
+    status: 'Active',
     visitor: 'Athena Weissnat',
     agent: 'Krish Ramos',
     browser: 'Chrome',
@@ -140,7 +152,7 @@ export function SortableTable() {
 
   const rows = sortedData.map((row) => (
     <Table.Tr key={row.id}>
-      <Table.Td>{row.status}</Table.Td>
+      <Table.Td><Status status={row.status} label={row.status} /></Table.Td>
       <Table.Td>{row.visitor}</Table.Td>
       <Table.Td>{row.agent}</Table.Td>
       <Table.Td>{row.browser}</Table.Td>
@@ -196,6 +208,9 @@ export function SortableTable() {
               onSort={() => setSorting('time')}
             >
               Time
+            </Th>
+            <Th>
+              {' '}
             </Th>
           </Table.Tr>
         </Table.Tbody>

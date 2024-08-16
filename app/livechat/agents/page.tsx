@@ -1,19 +1,17 @@
 'use client';
 
-import { Grid } from '@mantine/core';
+import { Card, Flex, Title } from '@mantine/core';
 import DashboardStats from '@/components/DashboardStats/DashboardStats';
 import { SortableTable } from '@/components/SortableTable/SortableTable';
 
 export default function AgentsPage() {
   return (
-    <Grid my="md">
-      <Grid.Col>
+    <Flex direction="column" gap="md">
+      <Title order={2}>Agents</Title>
       <DashboardStats />
-      </Grid.Col>
-
-      <Grid.Col>
+      <Card>
         <SortableTable />
-      </Grid.Col>
-    </Grid>
+      </Card>
+    </Flex>
   );
 }

@@ -1,14 +1,15 @@
 'use client';
 
+import { Card, Flex, Title } from '@mantine/core';
 import { SortableTable } from '@/components/SortableTable/SortableTable';
 
 export default function ChatPage() {
   return (
-    <div>
-      <SortableTable />
-      <SortableTable />
-      <SortableTable />
-      <SortableTable />
-    </div>
+    <Flex direction="column" gap="md">
+      <Title order={2}>Chats</Title>
+      <Card bg="white" p="md">
+        <SortableTable />
+      </Card>
+    </Flex>
   );
 }
