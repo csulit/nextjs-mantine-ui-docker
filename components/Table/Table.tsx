@@ -1,18 +1,17 @@
 import {
-  Center,
-  Group,
   ScrollArea,
-  Table,
+  Table as MUITable,
   Text,
   TextInput,
-  UnstyledButton,
   keys,
   rem,
+  Button,
 } from '@mantine/core';
-import { IconChevronDown, IconChevronUp, IconSearch, IconSelector } from '@tabler/icons-react';
+import { IconSearch } from '@tabler/icons-react';
 import { useState } from 'react';
-import classes from './SortableTable.module.css';
 import Status from '../Status/Status';
+import { TableHeader } from './TableHeader';
+import { theme } from '@/theme';
 
 interface RowData {
   id: string;
@@ -21,33 +20,6 @@ interface RowData {
   agent: string;
   browser:string;
   time: string;
-}
-
-interface ThProps {
-  children: React.ReactNode;
-  reversed?: boolean;
-  sorted?: boolean;
-  onSort?:()=> void;
-}
-
-function Th({ children, reversed, sorted, onSort }: ThProps) {
-  const Icon = sorted ? (reversed ? IconChevronUp : IconChevronDown) : IconSelector;
-  return (
-    <Table.Th className={classes.th}>
-      <UnstyledButton onClick={onSort} className={classes.control}>
-        <Group justify="space-between">
-          <Text fw={500} fz="sm">
-            {children}
-          </Text>
-          {onSort &&
-            <Center className={classes.icon}>
-              <Icon style={{ width: rem(16), height: rem(16) }} stroke={1.5} />
-            </Center>
-          }
-        </Group>
-      </UnstyledButton>
-    </Table.Th>
-  );
 }
 
 function filterData(data: RowData[], search: string) {
@@ -79,59 +51,12 @@ function sortData(
   );
 }
 
-interface Data {
-    id: string,
-    status: string,
-    visitor: string,
-    agent: string,
-    browser: string,
-    time: string,
+interface TableProps {
+  data: RowData[];
+  onView: ()=>void;
 }
 
-const data :Data[] = [
-  {
-    id: '1',
-    status: 'Pending',
-    visitor: 'Athena Weissnat',
-    agent: 'Krish Ramos',
-    browser: 'Chrome',
-    time: '11:00',
-  },
-  {
-    id: '2',
-    status: 'Active',
-    visitor: 'John Doe',
-    agent: 'Krish Ramos',
-    browser: 'Chrome',
-    time: '11:00',
-  },
-  {
-    id: '3',
-    status: 'Closed',
-    visitor: 'Jane Doe',
-    agent: 'Krish Ramos',
-    browser: 'Chrome',
-    time: '11:00',
-  },
-  {
-    id: '4',
-    status: 'Missed',
-    visitor: 'Athena Weissnat',
-    agent: 'Krish Ramos',
-    browser: 'Chrome',
-    time: '11:00',
-  },
-  {
-    id: '5',
-    status: 'Active',
-    visitor: 'Athena Weissnat',
-    agent: 'Krish Ramos',
-    browser: 'Chrome',
-    time: '11:00',
-  },
-];
-
-export function SortableTable() {
+export function Table({ data, onView }:TableProps) {
   const [search, setSearch] = useState('');
   const [sortedData, setSortedData] = useState(data);
   const [sortBy, setSortBy] = useState<keyof RowData | null>(null);
@@ -151,13 +76,22 @@ export function SortableTable() {
   };
 
   const rows = sortedData.map((row) => (
-    <Table.Tr key={row.id}>
-      <Table.Td><Status status={row.status} label={row.status} /></Table.Td>
-      <Table.Td>{row.visitor}</Table.Td>
-      <Table.Td>{row.agent}</Table.Td>
-      <Table.Td>{row.browser}</Table.Td>
-      <Table.Td>{row.time}</Table.Td>
-    </Table.Tr>
+    <MUITable.Tr key={row.id}>
+      <MUITable.Td><Status status={row.status} label={row.status} /></MUITable.Td>
+      <MUITable.Td>{row.visitor}</MUITable.Td>
+      <MUITable.Td>{row.agent}</MUITable.Td>
+      <MUITable.Td>{row.browser}</MUITable.Td>
+      <MUITable.Td>{row.time}</MUITable.Td>
+      <MUITable.Td>
+        <Button
+          size="compact-xs"
+          bg={theme.other?.orange600}
+          onClick={onView}
+        >
+          View
+        </Button>
+      </MUITable.Td>
+    </MUITable.Tr>
   ));
 
   return (
@@ -169,65 +103,65 @@ export function SortableTable() {
         value={search}
         onChange={handleSearchChange}
       />
-      <Table horizontalSpacing="md" verticalSpacing="xs" miw={700} layout="fixed">
-        <Table.Tbody>
-          <Table.Tr>
-            <Th
+      <MUITable horizontalSpacing="md" verticalSpacing="xs" miw={700} layout="fixed">
+        <MUITable.Tbody>
+          <MUITable.Tr>
+            <TableHeader
               sorted={sortBy === 'status'}
               reversed={reverseSortDirection}
               onSort={() => setSorting('status')}
             >
               Status
-            </Th>
-            <Th
+            </TableHeader>
+            <TableHeader
               sorted={sortBy === 'visitor'}
               reversed={reverseSortDirection}
               onSort={() => setSorting('visitor')}
             >
               Visitor
-            </Th>
-            <Th
+            </TableHeader>
+            <TableHeader
               sorted={sortBy === 'agent'}
               reversed={reverseSortDirection}
               onSort={() => setSorting('agent')}
             >
               Agent
-            </Th>
+            </TableHeader>
 
-            <Th
+            <TableHeader
               sorted={sortBy === 'browser'}
               reversed={reverseSortDirection}
               onSort={() => setSorting('browser')}
             >
               Browser
-            </Th>
+            </TableHeader>
 
-            <Th
+            <TableHeader
               sorted={sortBy === 'time'}
               reversed={reverseSortDirection}
               onSort={() => setSorting('time')}
             >
               Time
-            </Th>
-            <Th>
-              {' '}
-            </Th>
-          </Table.Tr>
-        </Table.Tbody>
-        <Table.Tbody>
+            </TableHeader>
+            <TableHeader>
+              Actions
+            </TableHeader>
+          </MUITable.Tr>
+        </MUITable.Tbody>
+        <MUITable.Tbody>
           {rows.length > 0 ? (
             rows
           ) : (
-            <Table.Tr>
-              <Table.Td colSpan={Object.keys(data[0]).length}>
+            <MUITable.Tr>
+              <MUITable.Td colSpan={Object.keys(data[0]).length}>
                 <Text fw={500} ta="center">
                   Nothing found
                 </Text>
-              </Table.Td>
-            </Table.Tr>
+              </MUITable.Td>
+            </MUITable.Tr>
           )}
-        </Table.Tbody>
-      </Table>
+        </MUITable.Tbody>
+      </MUITable>
     </ScrollArea>
   );
 }

@@ -5,7 +5,6 @@ import { ClerkProvider } from '@clerk/nextjs';
 import { auth } from '@clerk/nextjs/server';
 import { ColorSchemeScript, MantineProvider } from '@mantine/core';
 import { Notifications } from '@mantine/notifications';
-import { BasicAppShell } from '@/components/AppShell/AppShell';
 import { defaultValues } from '@/configs/default-values';
 import { PusherContextProvider } from '@/context/Pusher/PusherContext';
 import { ReactQueryProvider } from '@/context/ReactQueryProvider/ReactQueryProvider';
@@ -13,6 +12,7 @@ import '@mantine/charts/styles.css';
 import '@mantine/core/styles.css';
 import '@mantine/notifications/styles.css';
 import { cssResolver, theme } from '../theme';
+import { Layout } from '@/components/Layout/Layout';
 
 export const metadata = {
   title: 'Live Chat CMS',
@@ -40,7 +40,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               <MantineProvider theme={theme} cssVariablesResolver={cssResolver}>
                 <Notifications />
                 {userId && currentPathname !== defaultValues.PUBLIC_LIVECHAT_PATHNAME ? (
-                  <BasicAppShell>{children}</BasicAppShell>
+                  <Layout>{children}</Layout>
                 ) : (
                   children
                 )}
