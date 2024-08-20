@@ -1,5 +1,6 @@
-import { ActionIcon, Affix, AppShell, Burger, Flex, Group, Paper, Title, useComputedColorScheme, useMantineColorScheme } from '@mantine/core';
+import { ActionIcon, Affix, AppShell, Burger, Flex, Group, Title, useComputedColorScheme, useMantineColorScheme } from '@mantine/core';
 import { IconMoon, IconSun } from '@tabler/icons-react';
+import Image from 'next/image';
 import { theme } from '@/theme';
 
 interface LayoutHeaderProps {
@@ -22,11 +23,18 @@ export function LayoutHeader({ navOpen, toggleNav }:LayoutHeaderProps) {
     <AppShell.Header>
       <Group h="100%" px="md" align="center">
         <Burger opened={navOpen} onClick={toggleNav} hiddenFrom="sm" size="sm" />
-        <Flex gap="xs" align="center">
-          <Paper bg={theme.other?.orange600}>
-            <Title order={3} c="white" px="xs">KMC</Title>
-          </Paper>
-          <Title order={3} c={theme.other?.richBlack} fw={800}>LIVE CHAT CMS</Title>
+        <Flex gap={4} align="center">
+          <Flex align="center" gap={2}>
+            <Image
+              alt="kmc solutions"
+              src="https://erpfilestack.blob.core.windows.net/public/KMC-Icon.svg"
+              width={22}
+              height={22}
+            />
+            <Title order={2} fw={900} c={theme.other?.navy}>KMC</Title>
+          </Flex>
+
+          <Title order={4} c={theme.other?.richBlack} fw={500}>LIVE CHAT CMS</Title>
 
         </Flex>
         <Affix py="md" pr="md" position={{ top: 0, right: 0 }}>
