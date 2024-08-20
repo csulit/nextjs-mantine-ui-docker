@@ -1,6 +1,7 @@
 'use client';
 
 import { Card, Center, Flex, Paper, Text, Title } from '@mantine/core';
+import { IconMessage2Bolt, IconMessage2Cancel, IconMessage2Check, IconMessage2Exclamation } from '@tabler/icons-react';
 import { theme } from '@/theme';
 
 const stats = [
@@ -61,6 +62,13 @@ const statsColors: StatsColor = {
   },
 };
 
+const iconProps = {
+  height: 20,
+  width: 20,
+  color: 'white',
+  opacity: 0.8,
+};
+
 export default function DashboardStats() {
   return (
     <Flex align="center" gap="md">
@@ -68,42 +76,75 @@ export default function DashboardStats() {
         <Card
           key={stat.id}
           shadow="sm"
-          padding="lg"
           radius="md"
           withBorder
-          h={100}
-          w={150}
+          h={80}
+          w={160}
         >
-          <Card.Section p="lg">
-            <Center>
-              <Flex direction="column" align="center">
-                <Title
-                  order={1}
-                  fw={800}
-                  c={statsColors[stat.title.toLowerCase()].dot}
-                >
-                  {stat.value}
-                </Title>
-
-                <Flex align="center" gap={3}>
+          <Center h="100%">
+            <Card.Section>
+              <Flex direction="column">
+                <Flex gap="xs" align="center">
                   <Paper
-                    radius="xl"
-                    h={10}
-                    w={10}
-                    bg={statsColors[stat.title.toLowerCase()].dot}
-                  />
-                  <Text
-                    size="sm"
-                    fw={700}
-                    mt={0.5}
-                    c={statsColors[stat.title.toLowerCase()].text}
+                    radius="sm"
+                    h={40}
+                    w={40}
+                    style={{ overflow: 'hidden' }}
                   >
-                    {stat.title}
-                  </Text>
+                    <Flex
+                      align="center"
+                      justify="center"
+                      bg={statsColors[stat.title.toLowerCase()].dot}
+                      h="100%"
+                      w="100%"
+                    >
+                      {stat.title === 'Active' &&
+                        <IconMessage2Bolt
+                          {...iconProps}
+                        />
+                      }
+
+                      {stat.title === 'Pending' &&
+                        <IconMessage2Exclamation
+                          {...iconProps}
+                        />
+                      }
+
+                      {stat.title === 'Missed' &&
+                        <IconMessage2Cancel
+                          {...iconProps}
+                        />
+                      }
+
+                      {stat.title === 'Closed' &&
+                        <IconMessage2Check
+                          {...iconProps}
+                        />
+                      }
+                    </Flex>
+                  </Paper>
+                  <Flex direction="column" gap={5}>
+                    <Title
+                      order={3}
+                      fw={800}
+                      c={statsColors[stat.title.toLowerCase()].dot}
+                      lh={0.8}
+                    >
+                      {stat.value}
+                    </Title>
+
+                    <Text
+                      size="sm"
+                      fw={700}
+                      c={statsColors[stat.title.toLowerCase()].text}
+                    >
+                      {stat.title}
+                    </Text>
+                  </Flex>
                 </Flex>
               </Flex>
-            </Center>
-          </Card.Section>
+            </Card.Section>
+          </Center>
         </Card>
       ))}
     </Flex>

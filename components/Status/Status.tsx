@@ -48,7 +48,7 @@ export default function Status({ status, label }:StatusProps) {
     <Paper
       radius="xl"
       bg={statusColors[status.toLowerCase()].bg}
-      w={110}
+      w={90}
     >
       <Flex
         gap="xs"
