@@ -1,7 +1,8 @@
 'use client';
 
-import { createTheme, CSSVariablesResolver } from '@mantine/core';
+import { createTheme, CSSVariablesResolver, Input } from '@mantine/core';
 import { Karla, Barlow } from 'next/font/google';
+import classes from './styles/Global.module.css';
 
 const karla = Karla({
   subsets: ['latin'],
@@ -85,6 +86,9 @@ const colors : Colors = {
 };
 
 export const theme = createTheme({
+  components: {
+    Input: Input.extend({ classNames: classes }),
+  },
   fontFamily: karla.style.fontFamily,
   headings: { fontFamily: barlow.style.fontFamily, fontWeight: '700' },
   other: {
