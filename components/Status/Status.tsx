@@ -1,7 +1,6 @@
 'use client';
 
 import { Flex, Paper, Text } from '@mantine/core';
-import { theme } from '@/theme';
 
 interface StatusProps {
   status: string;
@@ -17,29 +16,29 @@ interface StatusColor {
 }
 
 const statusColors: StatusColor = {
-  active:
+   active:
   {
-    dot: theme.other?.green600,
-    bg: theme.other?.green300,
-    text: theme.other?.green800,
+    dot: 'green.6',
+    bg: 'green.3',
+    text: 'green.8',
   },
   pending:
   {
-    dot: theme.other?.orange600,
-    bg: theme.other?.orange300,
-    text: theme.other?.orange800,
+    dot: 'orange.6',
+    bg: 'orange.3',
+    text: 'orange.8',
   },
   closed:
   {
-    dot: theme.other?.neutral600,
-    bg: theme.other?.neutral300,
-    text: theme.other?.neutral800,
+    dot: 'neutral.6',
+    bg: 'neutral.3',
+    text: 'neutral.8',
   },
   missed:
   {
-    dot: theme.other?.red600,
-    bg: theme.other?.red300,
-    text: theme.other?.red800,
+    dot: 'red.6',
+    bg: 'red.3',
+    text: 'red.8',
   },
 };
 
@@ -48,13 +47,13 @@ export default function Status({ status, label }:StatusProps) {
     <Paper
       radius="xl"
       bg={statusColors[status.toLowerCase()].bg}
-      w={90}
+      w="fit-content"
     >
       <Flex
-        gap="xs"
+        gap={4}
         align="center"
-        px="xs"
-        h={25}
+        px={6}
+        h={20}
       >
         <Paper
           radius="xl"
@@ -62,7 +61,14 @@ export default function Status({ status, label }:StatusProps) {
           w={10}
           bg={statusColors[status.toLowerCase()].dot}
         />
-        <Text mt={0.5} size="xs" c={statusColors[status.toLowerCase()].text} fw={700}>{label}</Text>
+        <Text
+          mt={0.5}
+          size="xs"
+          c={statusColors[status.toLowerCase()].text}
+          fw={700}
+        >
+          {label}
+        </Text>
       </Flex>
     </Paper>
   );

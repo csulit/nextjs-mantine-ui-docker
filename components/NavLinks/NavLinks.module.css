@@ -6,14 +6,10 @@
   color: white;
   font-size: var(--mantine-font-size-sm);
   border-radius: var(--mantine-radius-sm);
-}
 
-.control:hover {
-  background-color: rgba(255, 255, 255, 0.08);
-}
-
-.control[data-active = "true"]{
-  background-color: rgba(255, 255, 255, 0.08);
+  &:hover, &[data-active = "true"] {
+    background-color: rgba(255, 255, 255, 0.08);
+  }
 }
 
 
@@ -27,14 +23,10 @@
   font-size: var(--mantine-font-size-sm);
   color: white;
   border-radius: var(--mantine-radius-sm);
-}
 
-.link:hover {
-  background-color: rgba(255, 255, 255, 0.04);
-}
-
-.link[data-active = "true"]{
-  background-color: rgba(255, 255, 255, 0.04);
+  &:hover, &[data-active = "true"] {
+    background-color: rgba(255, 255, 255, 0.04);
+  }
 }
 
 .chevron {

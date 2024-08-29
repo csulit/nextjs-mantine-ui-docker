@@ -6,13 +6,14 @@ interface ThProps {
   children: React.ReactNode;
   reversed?: boolean;
   sorted?: boolean;
-  onSort?:()=> void;
+  onSort?: () => void;
+  w?: number;
 }
 
-export function TableHeader({ children, reversed, sorted, onSort }: ThProps) {
+export function TableHeader({ children, reversed, sorted, onSort, w }: ThProps) {
   const Icon = sorted ? (reversed ? IconChevronUp : IconChevronDown) : IconSelector;
   return (
-    <Table.Th className={classes.th}>
+    <Table.Th className={classes.th} w={w || 'auto'}>
       <UnstyledButton onClick={onSort} className={classes.control}>
         <Group justify="space-between">
           <Text fw={500} fz="sm">

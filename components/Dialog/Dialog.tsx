@@ -1,6 +1,5 @@
 import { Box, Button, Flex, Modal, Title } from '@mantine/core';
 import { IconCircleXFilled } from '@tabler/icons-react';
-import { theme } from '@/theme';
 
 interface DialogProps {
   title: string;
@@ -24,18 +23,21 @@ export function Dialog({ title, isOpen, onClose, children }:DialogProps) {
               <Title order={4}>{title}</Title>
               <Button
                 size="compact-xs"
-                variant="transparent"
+                color="red"
+                variant="subtle"
+                radius="xl"
+                w={22}
+                p={0}
               >
                 <IconCircleXFilled
                   size={18}
-                  color={theme.other?.red600}
                   onClick={onClose}
                   />
               </Button>
             </Flex>
           </Modal.Title>
         </Modal.Header>
-        <Box h={1} w="100%" bg={theme.other?.neutral400} />
+        <Box h={1} w="100%" bg="neutral.4" />
         <Modal.Body h="94%" pos="relative" p={0}>
           <Box h="100%" w="100%">
             {children}

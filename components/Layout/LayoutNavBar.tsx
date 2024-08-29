@@ -2,7 +2,6 @@ import { UserButton } from '@clerk/nextjs';
 import { AppShell, Flex, Affix } from '@mantine/core';
 import { usePathname } from 'next/navigation';
 import { useEffect, useReducer } from 'react';
-import { theme } from '@/theme';
 import { NavLinks } from '../NavLinks/NavLinks';
 import { NAV_ITEMS } from '@/configs/navigation-items';
 import { NavAction, NavState } from '@/types/navigation.type';
@@ -36,7 +35,7 @@ export function LayoutNavbar() {
   }, [pathname]);
 
   return (
-    <AppShell.Navbar bg={theme.other?.richBlack} px="xs" py="md">
+    <AppShell.Navbar bg="black" px="xs" py="md">
       <Flex direction="column" gap="xs">
         {navState.map((navItem) => (
           <NavLinks key={navItem.id} {...navItem} />

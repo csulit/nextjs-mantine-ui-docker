@@ -1,5 +1,0 @@
-.input {
-  &:focus-within, &:focus {
-    border-color: #FF7200;
-  }
-}

@@ -2,7 +2,6 @@
 
 import { Card, Center, Flex, Paper, Text, Title } from '@mantine/core';
 import { IconMessage2Bolt, IconMessage2Cancel, IconMessage2Check, IconMessage2Exclamation } from '@tabler/icons-react';
-import { theme } from '@/theme';
 
 const stats = [
   {
@@ -38,27 +37,27 @@ interface StatsColor {
 const statsColors: StatsColor = {
   active:
   {
-    dot: theme.other?.green600,
-    bg: theme.other?.green300,
-    text: theme.other?.green800,
+    dot: 'green.6',
+    bg: 'green.3',
+    text: 'green.8',
   },
   pending:
   {
-    dot: theme.other?.orange600,
-    bg: theme.other?.orange300,
-    text: theme.other?.orange800,
+    dot: 'orange.6',
+    bg: 'orange.3',
+    text: 'orange.8',
   },
   closed:
   {
-    dot: theme.other?.neutral600,
-    bg: theme.other?.neutral100,
-    text: theme.other?.neutral800,
+    dot: 'neutral.6',
+    bg: 'neutral.3',
+    text: 'neutral.8',
   },
   missed:
   {
-    dot: theme.other?.red600,
-    bg: theme.other?.red300,
-    text: theme.other?.red800,
+    dot: 'red.6',
+    bg: 'red.3',
+    text: 'red.8',
   },
 };
 

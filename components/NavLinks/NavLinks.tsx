@@ -4,7 +4,6 @@ import { Icon, IconChevronRight } from '@tabler/icons-react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import classes from './NavLinks.module.css';
-import { theme } from '@/theme';
 
 interface LinksGroupProps {
   id: string;
@@ -42,7 +41,7 @@ export function NavLinks({ icon: LinkIcon, label, child, active, href }: LinksGr
         >
           <Group justify="space-between" gap="md" p="xs">
             <Flex align="center" c="white">
-              <ThemeIcon variant="filled" bg={theme.other?.orange600} size={40}>
+              <ThemeIcon variant="filled" bg="orange.6" size={40}>
                 {LinkIcon && <LinkIcon size="1.5rem" stroke={1.6} color="white" />}
               </ThemeIcon>
               <Box ml="md">{label}</Box>
@@ -75,7 +74,7 @@ export function NavLinks({ icon: LinkIcon, label, child, active, href }: LinksGr
         >
           <Group justify="space-between" gap="md" p="xs">
             <Flex align="center" c="white">
-              <ThemeIcon variant="filled" bg={theme.other?.orange600} size={40}>
+              <ThemeIcon variant="filled" bg="orange.6" size={40}>
                 {LinkIcon && <LinkIcon size="1.5rem" stroke={1.6} color="white" />}
               </ThemeIcon>
               <Box ml="md">{label}</Box>

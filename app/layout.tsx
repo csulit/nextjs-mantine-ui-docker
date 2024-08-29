@@ -11,7 +11,7 @@ import { ReactQueryProvider } from '@/context/ReactQueryProvider/ReactQueryProvi
 import '@mantine/charts/styles.css';
 import '@mantine/core/styles.css';
 import '@mantine/notifications/styles.css';
-import { cssResolver, theme } from '../theme';
+import { theme } from '../theme';
 import { Layout } from '@/components/Layout/Layout';
 
 export const metadata = {
@@ -37,7 +37,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <ClerkProvider>
           <ReactQueryProvider>
             <PusherContextProvider>
-              <MantineProvider theme={theme} cssVariablesResolver={cssResolver}>
+              <MantineProvider theme={theme}>
                 <Notifications />
                 {userId && currentPathname !== defaultValues.PUBLIC_LIVECHAT_PATHNAME ? (
                   <Layout>{children}</Layout>

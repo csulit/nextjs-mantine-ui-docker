@@ -23,7 +23,7 @@ export const chatTableDummyData :Chat[] = [
     status: 'Active',
     visitor: 'John Doe',
     agent: 'Krish Ramos',
-    browser: 'Chrome',
+    browser: 'Edge',
     time: '11:00',
   },
   {
@@ -31,7 +31,7 @@ export const chatTableDummyData :Chat[] = [
     status: 'Closed',
     visitor: 'Jane Doe',
     agent: 'Krish Ramos',
-    browser: 'Chrome',
+    browser: 'Safari',
     time: '11:00',
   },
   {
@@ -39,7 +39,7 @@ export const chatTableDummyData :Chat[] = [
     status: 'Missed',
     visitor: 'Athena Weissnat',
     agent: 'Krish Ramos',
-    browser: 'Chrome',
+    browser: 'Firefox',
     time: '11:00',
   },
   {
@@ -47,7 +47,7 @@ export const chatTableDummyData :Chat[] = [
     status: 'Active',
     visitor: 'Athena Weissnat',
     agent: 'Krish Ramos',
-    browser: 'Chrome',
+    browser: 'Opera',
     time: '11:00',
   },
 ];

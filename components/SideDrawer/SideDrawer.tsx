@@ -1,6 +1,5 @@
 import { Box, Button, Divider, Drawer, Flex, Title } from '@mantine/core';
 import { IconCircleXFilled } from '@tabler/icons-react';
-import { theme } from '@/theme';
 
 interface SideDrawerProps {
   open: boolean;
@@ -24,13 +23,16 @@ export function SideDrawer({ open, onClose, title, children }:SideDrawerProps) {
               <Title order={4}>{title}</Title>
               <Button
                 size="compact-xs"
-                variant="transparent"
+                color="red"
+                variant="subtle"
+                radius="xl"
+                w={22}
+                p={0}
               >
                 <IconCircleXFilled
-                  size={18}
-                  color={theme.other?.red600}
+                  size={20}
                   onClick={onClose}
-                  />
+                />
               </Button>
             </Flex>
           </Drawer.Title>

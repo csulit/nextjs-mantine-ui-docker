@@ -1,7 +1,6 @@
 import { ActionIcon, Affix, AppShell, Burger, Flex, Group, Title, useComputedColorScheme, useMantineColorScheme } from '@mantine/core';
 import { IconMoon, IconSun } from '@tabler/icons-react';
 import Image from 'next/image';
-import { theme } from '@/theme';
 
 interface LayoutHeaderProps {
   navOpen: boolean;
@@ -31,10 +30,10 @@ export function LayoutHeader({ navOpen, toggleNav }:LayoutHeaderProps) {
               width={22}
               height={22}
             />
-            <Title order={2} fw={900} c={theme.other?.navy}>KMC</Title>
+            <Title order={2} fw={900} c="navy">KMC</Title>
           </Flex>
 
-          <Title order={4} c={theme.other?.richBlack} fw={500}>LIVE CHAT CMS</Title>
+          <Title order={4} c="black" fw={500}>LIVE CHAT CMS</Title>
 
         </Flex>
         <Affix py="md" pr="md" position={{ top: 0, right: 0 }}>

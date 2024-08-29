@@ -11,4 +11,7 @@
   width: rem(21px);
   height: rem(21px);
   border-radius: rem(21px);
+  &:hover {
+    color: var(--mantine-color-orange-6);
+  }
 }

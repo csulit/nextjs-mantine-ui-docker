@@ -5,7 +5,6 @@ import { useDisclosure } from '@mantine/hooks';
 import { Table } from '@/components/Table/Table';
 import { chatTableDummyData } from '@/configs/default-values';
 import { SideDrawer } from '@/components/SideDrawer/SideDrawer';
-import { theme } from '@/theme';
 import { Dialog } from '@/components/Dialog/Dialog';
 
 export default function ChatPage() {
@@ -42,26 +41,25 @@ export default function ChatPage() {
           >
             <Flex direction="column" gap="md" p="sm">
               <Flex justify="space-between">
-                <Title order={5} c={theme.other?.neutral900}>
+                <Title order={5} c="neutral.9">
                   Room Information
                 </Title>
                 <Flex gap="sm" align="center" justify="center">
                   <Button
                     size="compact-xs"
-                    bg={theme.other?.orange600}
                     onClick={openEditDialog}
                   >
                     Edit
                   </Button>
                   <Button
                     size="compact-xs"
-                    bg={theme.other?.orange600}
+                    color="blue"
                   >
                     Ticket Creation
                   </Button>
                   <Button
                     size="compact-xs"
-                    bg={theme.other?.red600}
+                    color="red"
                   >
                     End Chat
                   </Button>
@@ -71,18 +69,30 @@ export default function ChatPage() {
               <Flex direction="column" px="sm">
                 <Flex justify="space-between">
                   <Text size="sm" fw={700}>John Doe</Text>
-                  <Text size="sm" fw={500} c={theme.other?.orange600}>johndoe@gmail.com</Text>
+                  <Text
+                    size="sm"
+                    fw={500}
+                    c="orange.6"
+                  >
+                    johndoe@gmail.com
+                  </Text>
                 </Flex>
                 <Flex justify="space-between">
                   <Text size="sm" fw={700}>Ticket Number</Text>
-                  <Text size="sm" fw={500} c={theme.other?.orange600}>SR-1234XX</Text>
+                  <Text
+                    size="sm"
+                    fw={500}
+                    c="neutral.8"
+                  >
+                    SR-1234XX
+                  </Text>
                 </Flex>
                 <Flex justify="space-between">
                   <Text size="sm" fw={700}>Queue Time</Text>
                   <Text
                     size="sm"
                     fw={500}
-                    c={theme.other?.orange600}
+                    c="neutral.8"
                   >
                    2 hours
                   </Text>
@@ -92,7 +102,7 @@ export default function ChatPage() {
                   <Text
                     size="sm"
                     fw={500}
-                    c={theme.other?.orange600}
+                    c="neutral.8"
                   >
                    a minute ago
                   </Text>
@@ -102,7 +112,7 @@ export default function ChatPage() {
                   <Text
                     size="sm"
                     fw={500}
-                    c={theme.other?.orange600}
+                    c="neutral.8"
                   >
                    53 seconds
                   </Text>
@@ -117,7 +127,7 @@ export default function ChatPage() {
               w="100%"
               h="100%"
               radius="md"
-              bd={`1px solid ${theme.other?.neutral400}`}
+              bd="1px solid neutral.4"
               p="sm"
               shadow="lg"
             >
@@ -151,7 +161,7 @@ export default function ChatPage() {
             </Input.Wrapper>
           </Flex>
 
-          <Button bg={theme.other?.orange600}>Submit</Button>
+          <Button>Submit</Button>
         </Flex>
       </Dialog>
     </>

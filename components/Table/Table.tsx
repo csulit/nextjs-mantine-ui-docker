@@ -6,12 +6,16 @@ import {
   keys,
   rem,
   Button,
+  Avatar,
+  Flex,
+  Paper,
 } from '@mantine/core';
-import { IconSearch } from '@tabler/icons-react';
+import { IconBrandChrome, IconBrandEdge, IconBrandFirefox, IconBrandOpera, IconBrandSafari, IconFileOff, IconSearch, IconSearchOff } from '@tabler/icons-react';
 import { useState } from 'react';
 import Status from '../Status/Status';
 import { TableHeader } from './TableHeader';
-import { theme } from '@/theme';
+import { H6 } from '../Headings/Headings';
+import { EmptyPlaceholder } from '../EmptyPlaceholder/EmptyPlaceholder';
 
 interface RowData {
   id: string;
@@ -77,15 +81,86 @@ export function Table({ data, onView }:TableProps) {
 
   const rows = sortedData.map((row) => (
     <MUITable.Tr key={row.id}>
-      <MUITable.Td><Status status={row.status} label={row.status} /></MUITable.Td>
-      <MUITable.Td>{row.visitor}</MUITable.Td>
-      <MUITable.Td>{row.agent}</MUITable.Td>
-      <MUITable.Td>{row.browser}</MUITable.Td>
+      <MUITable.Td>
+        <Status status={row.status} label={row.status} />
+      </MUITable.Td>
+      <MUITable.Td>
+        <Flex align="center" gap={4}>
+          <Avatar
+            size={20}
+            bd="1px solid orange.6"
+            bg="orange.0"
+          >
+            <Text fw={800} size="xs" c="orange.6">
+              {row.visitor.charAt(0).toUpperCase()}
+            </Text>
+          </Avatar>
+          {row.visitor}
+        </Flex>
+      </MUITable.Td>
+      <MUITable.Td>
+        <Flex align="center" gap={4}>
+          <Avatar
+            size={20}
+            bd="1px solid orange.6"
+            bg="orange.0"
+          >
+            <Text fw={800} size="xs" c="orange.6">
+              {row.agent.charAt(0).toUpperCase()}
+            </Text>
+          </Avatar>
+          {row.agent}
+        </Flex>
+      </MUITable.Td>
+      <MUITable.Td>
+        <Flex align="center" gap={4}>
+          {row.browser === 'Chrome' &&
+            <Paper radius="50%" bg="orange.2" h={20} w={20}>
+              <Text c="orange.6">
+                <IconBrandChrome size={20} />
+              </Text>
+            </Paper>
+          }
+
+          {row.browser === 'Edge' &&
+            <Paper radius="50%" bg="blue.2" h={20} w={20}>
+              <Text c="blue.6">
+                <IconBrandEdge size={20} />
+              </Text>
+            </Paper>
+          }
+
+          {row.browser === 'Safari' &&
+            <Paper radius="50%" bg="blue.3" h={20} w={20}>
+              <Text c="blue.5">
+                <IconBrandSafari size={20} />
+              </Text>
+            </Paper>
+          }
+
+          {row.browser === 'Firefox' &&
+            <Paper radius="50%" bg="orange.3" h={20} w={20}>
+              <Text c="orange.7">
+                <IconBrandFirefox size={20} />
+              </Text>
+            </Paper>
+          }
+
+          {row.browser === 'Opera' &&
+            <Paper radius="50%" bg="red.1" h={20} w={20}>
+              <Text c="red.6">
+                <IconBrandOpera size={20} />
+              </Text>
+            </Paper>
+          }
+
+          {row.browser}
+        </Flex>
+      </MUITable.Td>
       <MUITable.Td>{row.time}</MUITable.Td>
       <MUITable.Td>
         <Button
           size="compact-xs"
-          bg={theme.other?.orange600}
           onClick={onView}
         >
           View
@@ -105,11 +180,17 @@ export function Table({ data, onView }:TableProps) {
       />
       <MUITable horizontalSpacing="md" verticalSpacing="xs" miw={700} layout="fixed">
         <MUITable.Tbody>
-          <MUITable.Tr>
+          <MUITable.Tr
+            bg="neutral.1"
+            style={{
+              borderBottom: '1px solid var(--mantine-color-neutral-4)',
+            }}
+          >
             <TableHeader
               sorted={sortBy === 'status'}
               reversed={reverseSortDirection}
               onSort={() => setSorting('status')}
+              w={150}
             >
               Status
             </TableHeader>
@@ -117,6 +198,7 @@ export function Table({ data, onView }:TableProps) {
               sorted={sortBy === 'visitor'}
               reversed={reverseSortDirection}
               onSort={() => setSorting('visitor')}
+              w={300}
             >
               Visitor
             </TableHeader>
@@ -124,6 +206,7 @@ export function Table({ data, onView }:TableProps) {
               sorted={sortBy === 'agent'}
               reversed={reverseSortDirection}
               onSort={() => setSorting('agent')}
+              w={300}
             >
               Agent
             </TableHeader>
@@ -132,6 +215,7 @@ export function Table({ data, onView }:TableProps) {
               sorted={sortBy === 'browser'}
               reversed={reverseSortDirection}
               onSort={() => setSorting('browser')}
+              w={180}
             >
               Browser
             </TableHeader>
@@ -140,10 +224,11 @@ export function Table({ data, onView }:TableProps) {
               sorted={sortBy === 'time'}
               reversed={reverseSortDirection}
               onSort={() => setSorting('time')}
+              w={100}
             >
               Time
             </TableHeader>
-            <TableHeader>
+            <TableHeader w={100}>
               Actions
             </TableHeader>
           </MUITable.Tr>
@@ -153,10 +238,16 @@ export function Table({ data, onView }:TableProps) {
             rows
           ) : (
             <MUITable.Tr>
-              <MUITable.Td colSpan={Object.keys(data[0]).length}>
-                <Text fw={500} ta="center">
-                  Nothing found
-                </Text>
+              <MUITable.Td
+                colSpan={Object.keys(data[0]).length}
+                px={0}
+              >
+                <Paper bg="neutral.1" p="sm">
+                    <EmptyPlaceholder
+                      title="No Result Found."
+                      description="Your search has returned 0 record."
+                    />
+                </Paper>
               </MUITable.Td>
             </MUITable.Tr>
           )}

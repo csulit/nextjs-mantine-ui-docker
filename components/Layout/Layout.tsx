@@ -6,7 +6,6 @@ import {
 } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
 import { defaultValues } from '@/configs/default-values';
-import { theme } from '@/theme';
 import { LayoutHeader } from './LayoutHeader';
 import { LayoutNavbar } from './LayoutNavBar';
 
@@ -22,7 +21,11 @@ export function Layout({ children }: { children: ReactNode }) {
     >
       <LayoutHeader navOpen={navOpen} toggleNav={toggleNav} />
       <LayoutNavbar />
-      <AppShell.Main bg={theme.other?.neutral300}>{children}</AppShell.Main>
+      <AppShell.Main
+        bg="neutral.3"
+      >
+        {children}
+      </AppShell.Main>
     </AppShell>
   );
 }
